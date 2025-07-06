@@ -15,9 +15,7 @@ Grup 176
 ## Ürün İsmi
 
 --Hope & Progress Tracker--
-=======
-# Hope & Progress Tracker
->>>>>>> Stashed changes
+
 
 ## Ürün Açıklaması
 
@@ -31,10 +29,8 @@ Hope & Progress Tracker uygulamamız ile kanser tedavisi gören hastaların sağ
 - **Kategori Bazlı Filtreleme**: İhtiyaca göre kaynakları kategorilere ayırma (Kanser Kaynakları, Mental Sağlık, Beslenme, Egzersiz)
 - **Arama Fonksiyonu**: Hızlı ve kolay kaynak bulma
 - **Kullanıcı Dostu Arayüz**: Modern ve erişilebilir tasarım
-<<<<<<< Updated upstream
 - **Yapay Zeka ile Durum Analizi ve Öneri Sunma**: Hastanın vereceği bilgilere göre ona iyi gelebilecek her türlü öneri sunulma
-=======
->>>>>>> Stashed changes
+
 
 ### Bilgi Kütüphanesi İçeriği
 - **Kanser Kaynakları**: Tedavi seçenekleri, yan etkiler, doktor iletişimi rehberleri
@@ -46,7 +42,6 @@ Hope & Progress Tracker uygulamamız ile kanser tedavisi gören hastaların sağ
 - Responsive tasarım (mobil ve masaüstü uyumlu)
 - Gerçek zamanlı arama ve filtreleme
 - Kategorize edilmiş içerik yönetimi
-<<<<<<< Updated upstream
 
 ## Product Backlog URL
 
@@ -69,7 +64,7 @@ Story'ler yapılacak işlere (task'lere) bölünmüştür. Miro Board'da gözük
 - **Daily Scrum**: Daily Scrum toplantılarının zamansal sebeplerden ötürü Slack üzerinden yapılmasına karar verilmiştir. Daily Scrum toplantısı örneği jpeg veya word olarak Readme'de tarafımızdan paylaşılmaktadır: [Sprint 1 Daily Scrum Chats](https://github.com/OyunveUygulamaAkademisi/BootcampScrumTemplate/blob/main/ProjectManagement/Sprint1Documents/DailyScrumMeetingNotesSprint1.docx?raw=true)
 
 - **Sprint board update**: Sprint board screenshotları: 
-![Backlog 1](https://raw.githubusercontent.com/OyunveUygulamaAkademisi/BootcampScrumTemplate/main/ProjectManagement/Sprint1Documents/backlog1.png) 
+![Homepage](https://github.com/berkezkul/GoogleAcademy_FinalProject/blob/main/sprint1/product_images/hope_index.png) 
 ![Backlog 2](https://raw.githubusercontent.com/OyunveUygulamaAkademisi/BootcampScrumTemplate/main/ProjectManagement/Sprint1Documents/backlog2.png) 
 ![Backlog 3](https://raw.githubusercontent.com/OyunveUygulamaAkademisi/BootcampScrumTemplate/main/ProjectManagement/Sprint1Documents/backlog3.png)
 
