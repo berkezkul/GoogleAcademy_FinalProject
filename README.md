@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 # GoogleAcademy_FinalProject
 
 # **Takım İsmi**
