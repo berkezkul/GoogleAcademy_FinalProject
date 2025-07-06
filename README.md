@@ -69,7 +69,9 @@ Story'ler yapılacak işlere (task'lere) bölünmüştür. Miro Board'da gözük
 ![Backlog 3](https://raw.githubusercontent.com/OyunveUygulamaAkademisi/BootcampScrumTemplate/main/ProjectManagement/Sprint1Documents/backlog3.png)
 
 - **Ürün Durumu**: Ekran görüntüleri:
-
+![Homepage](https://github.com/berkezkul/GoogleAcademy_FinalProject/blob/main/sprint1/product_images/hope_index.png)
+![Progress & Datas Page](https://github.com/berkezkul/GoogleAcademy_FinalProject/blob/main/sprint1/product_images/hope_progress.png)
+![Library](https://github.com/berkezkul/GoogleAcademy_FinalProject/blob/main/sprint1/product_images/hope_library.png)
 
 - **Sprint Review**: 
 Alınan kararlar: YAZILACAK ......
