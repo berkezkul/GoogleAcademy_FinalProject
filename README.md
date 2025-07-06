@@ -9,7 +9,7 @@ Grup 176
 ## Takım Elemanları
 
 - Berke Özkul: Product Owner
-- Jane Doe: Scrum Master
+- Emirhan Akbal: Developer
 - Atıl Samancıoğlu: Team Member/Developer
 
 ## Ürün İsmi
