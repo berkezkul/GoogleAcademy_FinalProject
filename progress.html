@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Past Data | Hope & Progress Tracker</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#E6F3FF", secondary: "#E8F5E9" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      body {
+          font-family: 'Inter', sans-serif;
+          background-color: #FAFAFA;
+      }
+      .custom-shadow {
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+      .custom-switch {
+          position: relative;
+          display: inline-block;
+          width: 44px;
+          height: 24px;
+      }
+      .custom-switch input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+      }
+      .slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #E5E7EB;
+          transition: .4s;
+          border-radius: 24px;
+      }
+      .slider:before {
+          position: absolute;
+          content: "";
+          height: 18px;
+          width: 18px;
+          left: 3px;
+          bottom: 3px;
+          background-color: white;
+          transition: .4s;
+          border-radius: 50%;
+      }
+      input:checked + .slider {
+          background-color: #57B5E7;
+      }
+      input:checked + .slider:before {
+          transform: translateX(20px);
+      }
+      .date-range-picker {
+          display: none;
+      }
+      .date-range-picker.active {
+          display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="min-h-screen flex flex-col">
+      <!-- Top Navigation Bar -->
+      <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div
+          class="container mx-auto px-4 py-3 flex items-center justify-between"
+        >
+          <div class="flex items-center">
+            <h1 class="text-2xl font-['Pacifico'] text-gray-800">Hope</h1>
+          </div>
+          <div class="flex items-center space-x-4">
+            <div
+              class="w-10 h-10 flex items-center justify-center rounded-full bg-primary text-gray-700 cursor-pointer"
+            >
+              <i class="ri-notification-3-line ri-lg"></i>
+            </div>
+            <div
+              class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 cursor-pointer"
+            >
+              <i class="ri-user-line ri-lg"></i>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="flex-grow container mx-auto px-4 py-6">
+        <!-- Page Header with Back Button -->
+        <div class="flex items-center justify-between mb-6">
+          <a
+            href="index.html"
+            data-readdy="true"
+            class="flex items-center text-gray-700 hover:text-gray-900"
+          >
+            <div
+              class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100"
+            >
+              <i class="ri-arrow-left-s-line ri-lg"></i>
+            </div>
+            <span class="ml-2 font-medium">Back to Dashboard</span>
+          </a>
+          <button
+            class="px-4 py-2 bg-primary text-gray-700 font-medium rounded-button hover:bg-blue-100 transition-colors whitespace-nowrap"
+          >
+            <i class="ri-download-line mr-1"></i> Export Data
+          </button>
+        </div>
+
+        <h2 class="text-2xl font-semibold text-gray-800 mb-6">My Past Data</h2>
+
+        <!-- Time Period Filter -->
+        <div class="bg-white rounded-lg custom-shadow p-6 mb-8">
+          <div
+            class="flex flex-col md:flex-row md:items-center justify-between mb-4"
+          >
+            <h3 class="text-lg font-medium text-gray-800 mb-3 md:mb-0">
+              Time Period
+            </h3>
+            <div class="flex">
+              <div class="inline-flex rounded-full bg-gray-100 p-1">
+                <button
+                  id="week-btn"
+                  class="px-4 py-1 rounded-full bg-white text-gray-800 font-medium shadow-sm whitespace-nowrap"
+                >
+                  Week
+                </button>
+                <button
+                  id="month-btn"
+                  class="px-4 py-1 rounded-full text-gray-600 font-medium whitespace-nowrap"
+                >
+                  Month
+                </button>
+                <button
+                  id="year-btn"
+                  class="px-4 py-1 rounded-full text-gray-600 font-medium whitespace-nowrap"
+                >
+                  Year
+                </button>
+                <button
+                  id="custom-btn"
+                  class="px-4 py-1 rounded-full text-gray-600 font-medium whitespace-nowrap"
+                >
+                  Custom
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="flex flex-col md:flex-row md:items-center justify-between"
+          >
+            <div class="flex items-center mb-3 md:mb-0">
+              <p class="text-gray-700">
+                <span id="date-range">June 30 - July 6, 2025</span>
+              </p>
+              <button
+                id="prev-period"
+                class="ml-2 w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100"
+              >
+                <i class="ri-arrow-left-s-line"></i>
+              </button>
+              <button
+                id="next-period"
+                class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100"
+              >
+                <i class="ri-arrow-right-s-line"></i>
+              </button>
+            </div>
+            <div id="date-range-picker" class="date-range-picker">
+              <div class="flex space-x-2">
+                <div class="relative">
+                  <input
+                    type="date"
+                    class="px-3 py-2 border border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                    value="2025-06-30"
+                  />
+                </div>
+                <span class="flex items-center text-gray-500">to</span>
+                <div class="relative">
+                  <input
+                    type="date"
+                    class="px-3 py-2 border border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                    value="2025-07-06"
+                  />
+                </div>
+                <button
+                  class="px-3 py-2 bg-primary text-gray-700 font-medium rounded-button hover:bg-blue-100 transition-colors whitespace-nowrap text-sm"
+                >
+                  Apply
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mood Trends Chart -->
+        <div class="bg-white rounded-lg custom-shadow p-6 mb-8">
+          <div
+            class="flex flex-col md:flex-row md:items-center justify-between mb-6"
+          >
+            <h3 class="text-lg font-medium text-gray-800 mb-2 md:mb-0">
+              Mood Trends
+            </h3>
+            <div class="flex items-center space-x-4">
+              <button
+                class="px-3 py-1 bg-gray-100 text-gray-700 text-sm font-medium rounded-full hover:bg-gray-200 transition-colors whitespace-nowrap"
+              >
+                <i class="ri-zoom-in-line mr-1"></i> Zoom
+              </button>
+              <button
+                class="px-3 py-1 bg-gray-100 text-gray-700 text-sm font-medium rounded-full hover:bg-gray-200 transition-colors whitespace-nowrap"
+              >
+                <i class="ri-calendar-line mr-1"></i> Compare
+              </button>
+            </div>
+          </div>
+          <div class="h-72" id="moodTrendsChart"></div>
+          <div class="flex flex-wrap justify-center mt-4 gap-3">
+            <div class="flex items-center">
+              <div class="w-3 h-3 rounded-full bg-red-400 mr-1"></div>
+              <span class="text-sm text-gray-600">Very Low</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-3 h-3 rounded-full bg-orange-400 mr-1"></div>
+              <span class="text-sm text-gray-600">Low</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-3 h-3 rounded-full bg-yellow-400 mr-1"></div>
+              <span class="text-sm text-gray-600">Neutral</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-3 h-3 rounded-full bg-green-400 mr-1"></div>
+              <span class="text-sm text-gray-600">Good</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-3 h-3 rounded-full bg-blue-400 mr-1"></div>
+              <span class="text-sm text-gray-600">Very Good</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Symptom Tracking -->
+        <div class="bg-white rounded-lg custom-shadow p-6 mb-8">
+          <div
+            class="flex flex-col md:flex-row md:items-center justify-between mb-6"
+          >
+            <h3 class="text-lg font-medium text-gray-800 mb-2 md:mb-0">
+              Symptom Intensity
+            </h3>
+            <div class="flex flex-wrap gap-3">
+              <div class="flex items-center">
+                <label class="custom-switch mr-2">
+                  <input type="checkbox" checked />
+                  <span class="slider"></span>
+                </label>
+                <span class="text-sm text-gray-700">Fatigue</span>
+              </div>
+              <div class="flex items-center">
+                <label class="custom-switch mr-2">
+                  <input type="checkbox" checked />
+                  <span class="slider"></span>
+                </label>
+                <span class="text-sm text-gray-700">Pain</span>
+              </div>
+              <div class="flex items-center">
+                <label class="custom-switch mr-2">
+                  <input type="checkbox" checked />
+                  <span class="slider"></span>
+                </label>
+                <span class="text-sm text-gray-700">Nausea</span>
+              </div>
+              <div class="flex items-center">
+                <label class="custom-switch mr-2">
+                  <input type="checkbox" />
+                  <span class="slider"></span>
+                </label>
+                <span class="text-sm text-gray-700">Anxiety</span>
+              </div>
+            </div>
+          </div>
+          <div class="h-72" id="symptomChart"></div>
+        </div>
+
+        <!-- Energy Levels -->
+        <div class="bg-white rounded-lg custom-shadow p-6 mb-8">
+          <div
+            class="flex flex-col md:flex-row md:items-center justify-between mb-6"
+          >
+            <h3 class="text-lg font-medium text-gray-800 mb-2 md:mb-0">
+              Energy Levels
+            </h3>
+            <div class="flex items-center">
+              <div class="flex items-center mr-4">
+                <input
+                  type="radio"
+                  id="daily"
+                  name="energy-view"
+                  class="hidden"
+                  checked
+                />
+                <label for="daily" class="flex items-center cursor-pointer">
+                  <span
+                    class="w-4 h-4 rounded-full border border-gray-300 flex items-center justify-center mr-2"
+                  >
+                    <span
+                      class="w-2 h-2 rounded-full bg-blue-500 opacity-0 transition-opacity"
+                      id="daily-dot"
+                    ></span>
+                  </span>
+                  <span class="text-sm text-gray-700">Daily</span>
+                </label>
+              </div>
+              <div class="flex items-center">
+                <input
+                  type="radio"
+                  id="average"
+                  name="energy-view"
+                  class="hidden"
+                />
+                <label for="average" class="flex items-center cursor-pointer">
+                  <span
+                    class="w-4 h-4 rounded-full border border-gray-300 flex items-center justify-center mr-2"
+                  >
+                    <span
+                      class="w-2 h-2 rounded-full bg-blue-500 opacity-0 transition-opacity"
+                      id="average-dot"
+                    ></span>
+                  </span>
+                  <span class="text-sm text-gray-700">Average</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="h-72" id="energyChart"></div>
+        </div>
+
+        <!-- Notable Events -->
+        <div class="bg-white rounded-lg custom-shadow p-6 mb-8">
+          <h3 class="text-lg font-medium text-gray-800 mb-4">Notable Events</h3>
+          <div class="space-y-4">
+            <div class="flex">
+              <div class="flex flex-col items-center mr-4">
+                <div
+                  class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-100 text-blue-600"
+                >
+                  <i class="ri-medicine-bottle-line ri-lg"></i>
+                </div>
+                <div class="w-0.5 h-full bg-gray-200 mt-2"></div>
+              </div>
+              <div class="flex-1">
+                <div class="bg-gray-50 rounded-lg p-4">
+                  <div class="flex justify-between items-start mb-2">
+                    <h4 class="font-medium text-gray-800">Medication Change</h4>
+                    <span class="text-sm text-gray-500">July 3, 2025</span>
+                  </div>
+                  <p class="text-gray-700 mb-2">
+                    Dosage of Lisinopril increased from 10mg to 20mg daily.
+                  </p>
+                  <div class="flex items-center text-sm text-gray-500">
+                    <i class="ri-user-line mr-1"></i>
+                    <span>Dr. Sarah Johnson</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex">
+              <div class="flex flex-col items-center mr-4">
+                <div
+                  class="w-10 h-10 flex items-center justify-center rounded-full bg-green-100 text-green-600"
+                >
+                  <i class="ri-mental-health-line ri-lg"></i>
+                </div>
+                <div class="w-0.5 h-full bg-gray-200 mt-2"></div>
+              </div>
+              <div class="flex-1">
+                <div class="bg-gray-50 rounded-lg p-4">
+                  <div class="flex justify-between items-start mb-2">
+                    <h4 class="font-medium text-gray-800">Therapy Session</h4>
+                    <span class="text-sm text-gray-500">July 1, 2025</span>
+                  </div>
+                  <p class="text-gray-700 mb-2">
+                    Discussed coping strategies for managing anxiety during
+                    treatment.
+                  </p>
+                  <div class="flex items-center text-sm text-gray-500">
+                    <i class="ri-user-line mr-1"></i>
+                    <span>Dr. Michael Chen</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex">
+              <div class="flex flex-col items-center mr-4">
+                <div
+                  class="w-10 h-10 flex items-center justify-center rounded-full bg-purple-100 text-purple-600"
+                >
+                  <i class="ri-test-tube-line ri-lg"></i>
+                </div>
+                <div class="w-0.5 h-full bg-gray-200 mt-2"></div>
+              </div>
+              <div class="flex-1">
+                <div class="bg-gray-50 rounded-lg p-4">
+                  <div class="flex justify-between items-start mb-2">
+                    <h4 class="font-medium text-gray-800">Lab Results</h4>
+                    <span class="text-sm text-gray-500">June 30, 2025</span>
+                  </div>
+                  <p class="text-gray-700 mb-2">
+                    Blood work shows improvement in white blood cell count.
+                    Hemoglobin levels stable.
+                  </p>
+                  <div class="flex items-center text-sm text-gray-500">
+                    <i class="ri-hospital-line mr-1"></i>
+                    <span>Memorial Hospital</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 text-center">
+            <button
+              class="px-4 py-2 bg-gray-100 text-gray-700 font-medium rounded-button hover:bg-gray-200 transition-colors whitespace-nowrap"
+            >
+              <i class="ri-more-line mr-1"></i> Load More Events
+            </button>
+          </div>
+        </div>
+
+        <!-- Data Analysis Summary -->
+        <div class="bg-white rounded-lg custom-shadow p-6 mb-8">
+          <h3 class="text-lg font-medium text-gray-800 mb-4">Data Analysis</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-gray-50 rounded-lg p-4">
+              <h4 class="font-medium text-gray-800 mb-2">Mood Insights</h4>
+              <p class="text-gray-700 mb-3">
+                Your average mood this week is
+                <span class="font-medium text-blue-600">3.4/5</span>, which is
+                <span class="text-green-600">12% higher</span> than last week.
+              </p>
+              <div class="flex items-center">
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                  <div
+                    class="bg-blue-500 h-2.5 rounded-full"
+                    style="width: 68%"
+                  ></div>
+                </div>
+                <span class="ml-2 text-sm text-gray-600">68%</span>
+              </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-4">
+              <h4 class="font-medium text-gray-800 mb-2">
+                Symptom Correlation
+              </h4>
+              <p class="text-gray-700">
+                There appears to be a strong correlation between your fatigue
+                levels and mood scores. Days with lower fatigue show improved
+                mood.
+              </p>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-4">
+              <h4 class="font-medium text-gray-800 mb-2">Energy Patterns</h4>
+              <p class="text-gray-700">
+                Your energy levels tend to be highest in the morning and
+                gradually decrease throughout the day. Consider scheduling
+                important activities before noon.
+              </p>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-4">
+              <h4 class="font-medium text-gray-800 mb-2">Treatment Response</h4>
+              <p class="text-gray-700">
+                Since your medication change on July 3, your average mood score
+                has increased by <span class="text-green-600">0.7 points</span>,
+                suggesting a positive response.
+              </p>
+            </div>
+          </div>
+          <div class="mt-6">
+            <h4 class="font-medium text-gray-800 mb-3">Period Comparison</h4>
+            <div class="flex flex-col md:flex-row gap-4">
+              <div class="flex-1 bg-gray-50 rounded-lg p-4">
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-sm font-medium text-gray-700"
+                    >Current Period</span
+                  >
+                  <span class="text-sm text-gray-500">June 30 - July 6</span>
+                </div>
+                <div class="space-y-2">
+                  <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-600">Avg. Mood</span>
+                    <span class="text-sm font-medium">3.4/5</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-600">Avg. Energy</span>
+                    <span class="text-sm font-medium">3.1/5</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-600">Symptom-free Days</span>
+                    <span class="text-sm font-medium">2/7</span>
+                  </div>
+                </div>
+              </div>
+              <div class="flex-1 bg-gray-50 rounded-lg p-4">
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-sm font-medium text-gray-700"
+                    >Previous Period</span
+                  >
+                  <span class="text-sm text-gray-500">June 23 - June 29</span>
+                </div>
+                <div class="space-y-2">
+                  <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-600">Avg. Mood</span>
+                    <span class="text-sm font-medium">3.0/5</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-600">Avg. Energy</span>
+                    <span class="text-sm font-medium">2.8/5</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-600">Symptom-free Days</span>
+                    <span class="text-sm font-medium">1/7</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Bottom Navigation -->
+      <footer class="bg-white shadow-lg py-3 mt-auto">
+        <div class="container mx-auto px-4">
+          <div class="flex justify-around">
+            <a
+              href="index.html"
+              data-readdy="true"
+              class="flex flex-col items-center"
+            >
+              <div
+                class="w-10 h-10 flex items-center justify-center rounded-full text-gray-400"
+              >
+                <i class="ri-home-line ri-lg"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-400 mt-1">Home</span>
+            </a>
+
+            <div class="flex flex-col items-center">
+              <div
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-primary text-gray-700"
+              >
+                <i class="ri-line-chart-line ri-lg"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-700 mt-1"
+                >Progress</span
+              >
+            </div>
+
+            <div class="flex flex-col items-center">
+                <a
+              href="information_library.html"
+              data-readdy="true"
+              class="flex flex-col items-center"
+            >
+              <div
+                class="w-10 h-10 flex items-center justify-center rounded-full text-gray-400"
+              >
+                <i class="ri-book-open-line ri-lg"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-400 mt-1"
+                >Library</span
+              >
+            </div>
+
+            <div class="flex flex-col items-center">
+              <div
+                class="w-10 h-10 flex items-center justify-center rounded-full text-gray-400"
+              >
+                <i class="ri-user-settings-line ri-lg"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-400 mt-1"
+                >Profile</span
+              >
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+
+    <script id="time-period-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        const weekBtn = document.getElementById("week-btn");
+        const monthBtn = document.getElementById("month-btn");
+        const yearBtn = document.getElementById("year-btn");
+        const customBtn = document.getElementById("custom-btn");
+        const dateRangeEl = document.getElementById("date-range");
+        const dateRangePicker = document.getElementById("date-range-picker");
+        const prevPeriod = document.getElementById("prev-period");
+        const nextPeriod = document.getElementById("next-period");
+
+        const periods = {
+          week: "June 30 - July 6, 2025",
+          month: "July 1 - July 31, 2025",
+          year: "January 1 - December 31, 2025",
+          custom: "Custom Range",
+        };
+
+        function updateActiveButton(activeBtn) {
+          [weekBtn, monthBtn, yearBtn, customBtn].forEach((btn) => {
+            btn.classList.remove("bg-white", "shadow-sm", "text-gray-800");
+            btn.classList.add("text-gray-600");
+          });
+
+          activeBtn.classList.add("bg-white", "shadow-sm", "text-gray-800");
+          activeBtn.classList.remove("text-gray-600");
+        }
+
+        weekBtn.addEventListener("click", function () {
+          updateActiveButton(this);
+          dateRangeEl.textContent = periods.week;
+          dateRangePicker.classList.remove("active");
+          updateCharts("week");
+        });
+
+        monthBtn.addEventListener("click", function () {
+          updateActiveButton(this);
+          dateRangeEl.textContent = periods.month;
+          dateRangePicker.classList.remove("active");
+          updateCharts("month");
+        });
+
+        yearBtn.addEventListener("click", function () {
+          updateActiveButton(this);
+          dateRangeEl.textContent = periods.year;
+          dateRangePicker.classList.remove("active");
+          updateCharts("year");
+        });
+
+        customBtn.addEventListener("click", function () {
+          updateActiveButton(this);
+          dateRangePicker.classList.add("active");
+        });
+
+        prevPeriod.addEventListener("click", function () {
+          // Logic for previous period would go here
+          // For demo purposes, we'll just show a different date range
+          if (dateRangeEl.textContent === periods.week) {
+            dateRangeEl.textContent = "June 23 - June 29, 2025";
+          } else if (dateRangeEl.textContent === "June 23 - June 29, 2025") {
+            dateRangeEl.textContent = "June 16 - June 22, 2025";
+          } else {
+            dateRangeEl.textContent = periods.week;
+          }
+          updateCharts("prev");
+        });
+
+        nextPeriod.addEventListener("click", function () {
+          // Logic for next period would go here
+          // For demo purposes, we'll just show a different date range
+          if (dateRangeEl.textContent === periods.week) {
+            dateRangeEl.textContent = "July 7 - July 13, 2025";
+          } else if (dateRangeEl.textContent === "July 7 - July 13, 2025") {
+            dateRangeEl.textContent = "July 14 - July 20, 2025";
+          } else {
+            dateRangeEl.textContent = periods.week;
+          }
+          updateCharts("next");
+        });
+
+        function updateCharts(period) {
+          // This function would update all charts based on the selected period
+          // For demo purposes, we're not implementing the full logic
+          console.log(`Updating charts for period: ${period}`);
+        }
+      });
+    </script>
+
+    <script id="radio-buttons-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        const dailyRadio = document.getElementById("daily");
+        const averageRadio = document.getElementById("average");
+        const dailyDot = document.getElementById("daily-dot");
+        const averageDot = document.getElementById("average-dot");
+
+        function updateRadioButtons() {
+          if (dailyRadio.checked) {
+            dailyDot.style.opacity = "1";
+            averageDot.style.opacity = "0";
+          } else {
+            dailyDot.style.opacity = "0";
+            averageDot.style.opacity = "1";
+          }
+        }
+
+        dailyRadio.addEventListener("change", updateRadioButtons);
+        averageRadio.addEventListener("change", updateRadioButtons);
+
+        // Initialize
+        updateRadioButtons();
+      });
+    </script>
+
+    <script id="charts-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        // Mood Trends Chart
+        const moodTrendsChart = echarts.init(
+          document.getElementById("moodTrendsChart"),
+        );
+        const moodTrendsOption = {
+          animation: false,
+          grid: {
+            top: 30,
+            right: 20,
+            bottom: 30,
+            left: 50,
+          },
+          legend: {
+            show: false,
+          },
+          xAxis: {
+            type: "category",
+            data: [
+              "Mon 6/30",
+              "Tue 7/1",
+              "Wed 7/2",
+              "Thu 7/3",
+              "Fri 7/4",
+              "Sat 7/5",
+              "Sun 7/6",
+            ],
+            axisLine: {
+              lineStyle: {
+                color: "#E5E7EB",
+              },
+            },
+            axisLabel: {
+              color: "#6B7280",
+              fontSize: 12,
+              rotate: 0,
+            },
+          },
+          yAxis: {
+            type: "value",
+            min: 1,
+            max: 5,
+            interval: 1,
+            axisLine: {
+              show: false,
+            },
+            axisLabel: {
+              color: "#6B7280",
+              fontSize: 12,
+              formatter: function (value) {
+                const labels = [
+                  "",
+                  "Very Low",
+                  "Low",
+                  "Neutral",
+                  "Good",
+                  "Very Good",
+                ];
+                return labels[value];
+              },
+            },
+            splitLine: {
+              lineStyle: {
+                color: "#F3F4F6",
+              },
+            },
+          },
+          series: [
+            {
+              name: "Mood",
+              data: [2, 2, 3, 4, 3, 5, 4],
+              type: "line",
+              smooth: true,
+              symbolSize: 8,
+              itemStyle: {
+                color: function (params) {
+                  const colors = [
+                    "#F87171",
+                    "#FB923C",
+                    "#FBBF24",
+                    "#4ADE80",
+                    "#60A5FA",
+                  ];
+                  return colors[params.value - 1];
+                },
+              },
+              lineStyle: {
+                color: "rgba(87, 181, 231, 1)",
+                width: 3,
+              },
+              areaStyle: {
+                color: {
+                  type: "linear",
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [
+                    {
+                      offset: 0,
+                      color: "rgba(87, 181, 231, 0.2)",
+                    },
+                    {
+                      offset: 1,
+                      color: "rgba(87, 181, 231, 0.01)",
+                    },
+                  ],
+                },
+              },
+              markLine: {
+                silent: true,
+                lineStyle: {
+                  color: "#E5E7EB",
+                  type: "dashed",
+                },
+                data: [
+                  {
+                    yAxis: 3,
+                    label: {
+                      show: false,
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+          tooltip: {
+            trigger: "axis",
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
+            borderColor: "#E5E7EB",
+            textStyle: {
+              color: "#1F2937",
+            },
+            formatter: function (params) {
+              const moodLabels = ["Very Low", "Low", "Neutral", "Good", "Very Good"];
+              const value = params[0].value;
+              const date = params[0].name;
+              return `<div style="font-weight:500">${date}</div>
+                                      <div style="margin-top:5px">
+                                          <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background-color:${params[0].color};margin-right:5px"></span>
+                                          Mood: ${moodLabels[value - 1]} (${value}/5)
+                                      </div>`;
+            },
+          },
+        };
+        moodTrendsChart.setOption(moodTrendsOption);
+
+        // Symptom Chart
+        const symptomChart = echarts.init(document.getElementById("symptomChart"));
+        const symptomOption = {
+          animation: false,
+          grid: {
+            top: 30,
+            right: 20,
+            bottom: 30,
+            left: 50,
+          },
+          legend: {
+            data: ["Fatigue", "Pain", "Nausea"],
+            bottom: 0,
+            textStyle: {
+              color: "#6B7280",
+            },
+          },
+          xAxis: {
+            type: "category",
+            data: [
+              "Mon 6/30",
+              "Tue 7/1",
+              "Wed 7/2",
+              "Thu 7/3",
+              "Fri 7/4",
+              "Sat 7/5",
+              "Sun 7/6",
+            ],
+            axisLine: {
+              lineStyle: {
+                color: "#E5E7EB",
+              },
+            },
+            axisLabel: {
+              color: "#6B7280",
+              fontSize: 12,
+            },
+          },
+          yAxis: {
+            type: "value",
+            min: 0,
+            max: 10,
+            interval: 2,
+            name: "Intensity",
+            nameTextStyle: {
+              color: "#6B7280",
+              padding: [0, 0, 0, 40],
+            },
+            axisLine: {
+              show: false,
+            },
+            axisLabel: {
+              color: "#6B7280",
+              fontSize: 12,
+            },
+            splitLine: {
+              lineStyle: {
+                color: "#F3F4F6",
+              },
+            },
+          },
+          series: [
+            {
+              name: "Fatigue",
+              type: "bar",
+              stack: "symptom",
+              emphasis: {
+                focus: "series",
+              },
+              data: [7, 6, 5, 4, 5, 3, 4],
+              itemStyle: {
+                color: "rgba(87, 181, 231, 1)",
+                borderRadius: [4, 4, 0, 0],
+              },
+            },
+            {
+              name: "Pain",
+              type: "bar",
+              stack: "symptom",
+              emphasis: {
+                focus: "series",
+              },
+              data: [4, 5, 3, 2, 3, 1, 2],
+              itemStyle: {
+                color: "rgba(141, 211, 199, 1)",
+                borderRadius: [4, 4, 0, 0],
+              },
+            },
+            {
+              name: "Nausea",
+              type: "bar",
+              stack: "symptom",
+              emphasis: {
+                focus: "series",
+              },
+              data: [2, 3, 1, 0, 1, 0, 1],
+              itemStyle: {
+                color: "rgba(251, 191, 114, 1)",
+                borderRadius: [4, 4, 0, 0],
+              },
+            },
+          ],
+          tooltip: {
+            trigger: "axis",
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
+            borderColor: "#E5E7EB",
+            textStyle: {
+              color: "#1F2937",
+            },
+            axisPointer: {
+              type: "shadow",
+            },
+          },
+        };
+        symptomChart.setOption(symptomOption);
+
+        // Energy Chart
+        const energyChart = echarts.init(document.getElementById("energyChart"));
+        const energyOption = {
+          animation: false,
+          grid: {
+            top: 30,
+            right: 20,
+            bottom: 30,
+            left: 50,
+          },
+          xAxis: {
+            type: "category",
+            data: [
+              "Mon 6/30",
+              "Tue 7/1",
+              "Wed 7/2",
+              "Thu 7/3",
+              "Fri 7/4",
+              "Sat 7/5",
+              "Sun 7/6",
+            ],
+            axisLine: {
+              lineStyle: {
+                color: "#E5E7EB",
+              },
+            },
+            axisLabel: {
+              color: "#6B7280",
+              fontSize: 12,
+            },
+          },
+          yAxis: {
+            type: "value",
+            min: 1,
+            max: 5,
+            interval: 1,
+            name: "Energy Level",
+            nameTextStyle: {
+              color: "#6B7280",
+              padding: [0, 0, 0, 40],
+            },
+            axisLine: {
+              show: false,
+            },
+            axisLabel: {
+              color: "#6B7280",
+              fontSize: 12,
+            },
+            splitLine: {
+              lineStyle: {
+                color: "#F3F4F6",
+              },
+            },
+          },
+          series: [
+            {
+              data: [2, 3, 2, 3, 4, 3, 4],
+              type: "line",
+              smooth: true,
+              symbolSize: 8,
+              itemStyle: {
+                color: "rgba(252, 141, 98, 1)",
+              },
+              lineStyle: {
+                color: "rgba(252, 141, 98, 1)",
+                width: 3,
+              },
+              areaStyle: {
+                color: {
+                  type: "linear",
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [
+                    {
+                      offset: 0,
+                      color: "rgba(252, 141, 98, 0.2)",
+                    },
+                    {
+                      offset: 1,
+                      color: "rgba(252, 141, 98, 0.01)",
+                    },
+                  ],
+                },
+              },
+            },
+          ],
+          tooltip: {
+            trigger: "axis",
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
+            borderColor: "#E5E7EB",
+            textStyle: {
+              color: "#1F2937",
+            },
+          },
+        };
+        energyChart.setOption(energyOption);
+
+        // Handle window resize
+        window.addEventListener("resize", function () {
+          moodTrendsChart.resize();
+          symptomChart.resize();
+          energyChart.resize();
+        });
+      });
+    </script>
+  </body>
+</html>

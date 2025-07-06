@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hope & Progress Tracker</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#E6F3FF", secondary: "#E8F5E9" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      body {
+      font-family: 'Inter', sans-serif;
+      background-color: #FAFAFA;
+      }
+      .emoji-rating input[type="radio"] {
+      display: none;
+      }
+      .emoji-rating label {
+      cursor: pointer;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      }
+      .emoji-rating input[type="radio"]:checked + label {
+      transform: scale(1.1);
+      opacity: 1;
+      }
+      .emoji-rating label:not(.selected) {
+      opacity: 0.5;
+      }
+      .custom-shadow {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+      .gradient-card {
+      background: linear-gradient(120deg, #E6F3FF 0%, #E8F5E9 100%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="min-h-screen flex flex-col">
+      <!-- Top Navigation Bar -->
+      <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div
+          class="container mx-auto px-4 py-3 flex items-center justify-between"
+        >
+          <div class="flex items-center">
+            <h1 class="text-2xl font-['Pacifico'] text-gray-800">Hope</h1>
+          </div>
+          <div class="flex items-center space-x-4">
+            <div
+              class="w-10 h-10 flex items-center justify-center rounded-full bg-primary text-gray-700 cursor-pointer"
+            >
+              <i class="ri-notification-3-line ri-lg"></i>
+            </div>
+            <div
+              class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 cursor-pointer"
+            >
+              <i class="ri-user-line ri-lg"></i>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- Main Content -->
+      <main class="flex-grow container mx-auto px-4 py-6">
+        <!-- Greeting and Date -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-semibold text-gray-800">
+            Good Morning, Emily
+          </h2>
+          <p class="text-gray-500">July 6, 2025 | Sunday</p>
+        </div>
+        <!-- How Are You Today Module -->
+        <div class="bg-white rounded-lg custom-shadow p-6 mb-8">
+          <h3 class="text-xl font-medium text-gray-800 mb-4">
+            How are you feeling today?
+          </h3>
+          <div class="emoji-rating flex justify-between items-center mb-6">
+            <input type="radio" name="feeling" id="feeling-1" value="1" />
+            <label for="feeling-1" class="flex flex-col items-center">
+              <div
+                class="w-14 h-14 flex items-center justify-center bg-red-100 rounded-full mb-2"
+              >
+                <span class="text-2xl">😞</span>
+              </div>
+              <span class="text-sm font-medium text-gray-700">Very Low</span>
+            </label>
+            <input type="radio" name="feeling" id="feeling-2" value="2" />
+            <label for="feeling-2" class="flex flex-col items-center">
+              <div
+                class="w-14 h-14 flex items-center justify-center bg-orange-100 rounded-full mb-2"
+              >
+                <span class="text-2xl">😔</span>
+              </div>
+              <span class="text-sm font-medium text-gray-700">Low</span>
+            </label>
+            <input type="radio" name="feeling" id="feeling-3" value="3" />
+            <label for="feeling-3" class="flex flex-col items-center">
+              <div
+                class="w-14 h-14 flex items-center justify-center bg-yellow-100 rounded-full mb-2"
+              >
+                <span class="text-2xl">😐</span>
+              </div>
+              <span class="text-sm font-medium text-gray-700">Neutral</span>
+            </label>
+            <input type="radio" name="feeling" id="feeling-4" value="4" />
+            <label for="feeling-4" class="flex flex-col items-center">
+              <div
+                class="w-14 h-14 flex items-center justify-center bg-green-100 rounded-full mb-2"
+              >
+                <span class="text-2xl">🙂</span>
+              </div>
+              <span class="text-sm font-medium text-gray-700">Good</span>
+            </label>
+            <input type="radio" name="feeling" id="feeling-5" value="5" />
+            <label for="feeling-5" class="flex flex-col items-center">
+              <div
+                class="w-14 h-14 flex items-center justify-center bg-blue-100 rounded-full mb-2"
+              >
+                <span class="text-2xl">😊</span>
+              </div>
+              <span class="text-sm font-medium text-gray-700">Very Good</span>
+            </label>
+          </div>
+          <div class="mb-4">
+            <label
+              for="notes"
+              class="block text-sm font-medium text-gray-700 mb-1"
+              >Any additional notes?</label
+            >
+            <textarea
+              id="notes"
+              rows="2"
+              class="w-full px-4 py-2 border border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+              placeholder="Share how you're feeling today..."
+            ></textarea>
+          </div>
+          <div class="flex justify-end">
+            <button
+              class="px-6 py-2 bg-primary text-gray-700 font-medium rounded-button hover:bg-blue-100 transition-colors whitespace-nowrap"
+            >
+              Save Entry
+            </button>
+          </div>
+        </div>
+        <!-- AI Suggestion Card -->
+        <div class="gradient-card rounded-lg custom-shadow p-6 mb-8">
+          <div class="flex items-start">
+            <div
+              class="w-12 h-12 flex items-center justify-center bg-white rounded-full mr-4 flex-shrink-0"
+            >
+              <i class="ri-robot-line ri-lg text-blue-500"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-medium text-gray-800 mb-1">
+                Your Suggestion for Today
+              </h3>
+              <p class="text-gray-700 mb-4">
+                Consider starting your day with a 5-minute breathing exercise.
+                Research shows that deep breathing can help reduce stress and
+                improve your overall mood. Would you like me to guide you
+                through a simple breathing exercise?
+              </p>
+              <div class="flex space-x-3">
+                <button
+                  class="px-4 py-2 bg-white text-gray-700 font-medium rounded-button hover:bg-gray-50 transition-colors whitespace-nowrap"
+                >
+                  <i class="ri-thumb-up-line mr-1"></i> Helpful
+                </button>
+                <button
+                  class="px-4 py-2 bg-white text-gray-700 font-medium rounded-button hover:bg-gray-50 transition-colors whitespace-nowrap"
+                >
+                  <i class="ri-refresh-line mr-1"></i> New Suggestion
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Progress Overview -->
+        <h3 class="text-xl font-medium text-gray-800 mb-4">Your Progress</h3>
+        <div class="overflow-x-auto pb-2 mb-8">
+          <div class="flex space-x-4" style="min-width: max-content;">
+            <div class="bg-white rounded-lg custom-shadow p-4 w-64">
+              <h4 class="text-sm font-medium text-gray-500 mb-2">
+                Weekly Mood Trend
+              </h4>
+              <div class="h-32" id="weeklyMoodChart"></div>
+            </div>
+            <div class="bg-white rounded-lg custom-shadow p-4 w-64">
+              <h4 class="text-sm font-medium text-gray-500 mb-2">
+                Energy Levels
+              </h4>
+              <div class="h-32" id="energyLevelsChart"></div>
+            </div>
+            <div class="bg-white rounded-lg custom-shadow p-4 w-64">
+              <h4 class="text-sm font-medium text-gray-500 mb-2">
+                Next Appointment
+              </h4>
+              <div class="flex items-center mb-3">
+                <div
+                  class="w-10 h-10 flex items-center justify-center bg-primary rounded-full mr-3"
+                >
+                  <i class="ri-calendar-line ri-lg"></i>
+                </div>
+                <div>
+                  <p class="font-medium text-gray-800">Dr. Sarah Johnson</p>
+                  <p class="text-sm text-gray-500">Oncologist</p>
+                </div>
+              </div>
+              <p class="text-sm text-gray-700">
+                <i class="ri-time-line mr-1"></i> July 10, 2025 at 10:30 AM
+              </p>
+            </div>
+            <div class="bg-white rounded-lg custom-shadow p-4 w-64">
+              <h4 class="text-sm font-medium text-gray-500 mb-2">
+                Achievements
+              </h4>
+              <div class="flex flex-wrap gap-2">
+                <div
+                  class="flex items-center justify-center w-12 h-12 bg-yellow-100 rounded-full"
+                >
+                  <i class="ri-medal-line ri-lg text-yellow-600"></i>
+                </div>
+                <div
+                  class="flex items-center justify-center w-12 h-12 bg-green-100 rounded-full"
+                >
+                  <i class="ri-heart-pulse-line ri-lg text-green-600"></i>
+                </div>
+                <div
+                  class="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full"
+                >
+                  <i class="ri-calendar-check-line ri-lg text-blue-600"></i>
+                </div>
+                <div
+                  class="flex items-center justify-center w-12 h-12 bg-purple-100 rounded-full"
+                >
+                  <i class="ri-mental-health-line ri-lg text-purple-600"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Quick Access Cards -->
+        <h3 class="text-xl font-medium text-gray-800 mb-4">Quick Access</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          <a
+            href="progress.html"
+            data-readdy="true"
+            class="block"
+          >
+            <div
+              class="bg-white rounded-lg custom-shadow p-6 hover:shadow-md transition-shadow"
+            >
+              <div
+                class="w-12 h-12 flex items-center justify-center bg-primary rounded-full mb-4"
+              >
+                <i class="ri-line-chart-line ri-lg"></i>
+              </div>
+              <h4 class="text-lg font-medium text-gray-800 mb-2">
+                My Past Data
+              </h4>
+              <p class="text-gray-600">
+                View your historical mood and symptom data to track your
+                progress over time.
+              </p>
+            </div>
+          </a>
+          <a
+            href="information_library.html"
+            data-readdy="true"
+            class="block"
+          >
+            <div
+              class="bg-white rounded-lg custom-shadow p-6 hover:shadow-md transition-shadow"
+            >
+              <div
+                class="w-12 h-12 flex items-center justify-center bg-secondary rounded-full mb-4"
+              >
+                <i class="ri-book-open-line ri-lg"></i>
+              </div>
+              <h4 class="text-lg font-medium text-gray-800 mb-2">
+                Information Library
+              </h4>
+              <p class="text-gray-600">
+                Access helpful resources, articles, and tips to support your
+                journey.
+              </p>
+            </div>
+          </a>
+          <div
+            class="bg-white rounded-lg custom-shadow p-6 hover:shadow-md transition-shadow cursor-pointer"
+          >
+            <div
+              class="w-12 h-12 flex items-center justify-center bg-yellow-100 rounded-full mb-4"
+            >
+              <i class="ri-team-line ri-lg"></i>
+            </div>
+            <h4 class="text-lg font-medium text-gray-800 mb-2">
+              Support Network
+            </h4>
+            <p class="text-gray-600">
+              Connect with your care team, family members, and support groups.
+            </p>
+          </div>
+          <div
+            class="bg-white rounded-lg custom-shadow p-6 hover:shadow-md transition-shadow cursor-pointer"
+          >
+            <div
+              class="w-12 h-12 flex items-center justify-center bg-purple-100 rounded-full mb-4"
+            >
+              <i class="ri-book-mark-line ri-lg"></i>
+            </div>
+            <h4 class="text-lg font-medium text-gray-800 mb-2">
+              Daily Journal
+            </h4>
+            <p class="text-gray-600">
+              Record your thoughts, experiences, and reflections in a private
+              journal.
+            </p>
+          </div>
+        </div>
+      </main>
+      <!-- Bottom Navigation -->
+      <footer class="bg-white shadow-lg py-3 mt-auto">
+        <div class="container mx-auto px-4">
+          <div class="flex justify-around">
+            <div class="flex flex-col items-center">
+              <div
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-primary text-gray-700"
+              >
+                <i class="ri-home-line ri-lg"></i>
+              </div>
+              
+              <span class="text-xs font-medium text-gray-700 mt-1">Home</span>
+            </div>
+            <div class="flex flex-col items-center">
+              <div
+                class="w-10 h-10 flex items-center justify-center rounded-full text-gray-400"
+              >
+                <i class="ri-line-chart-line ri-lg"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-400 mt-1"
+                >Progress</span
+              >
+            </div>
+            <div class="flex flex-col items-center">
+              <div
+                class="w-10 h-10 flex items-center justify-center rounded-full text-gray-400"
+              >
+                <i class="ri-book-open-line ri-lg"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-400 mt-1"
+                >Library</span
+              >
+            </div>
+            <div class="flex flex-col items-center">
+              <div
+                class="w-10 h-10 flex items-center justify-center rounded-full text-gray-400"
+              >
+                <i class="ri-user-settings-line ri-lg"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-400 mt-1"
+                >Profile</span
+              >
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+    <script id="emoji-rating-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        const ratingLabels = document.querySelectorAll(".emoji-rating label");
+        const ratingInputs = document.querySelectorAll(".emoji-rating input");
+        ratingInputs.forEach((input, index) => {
+          input.addEventListener("change", function () {
+            ratingLabels.forEach((label) => label.classList.remove("selected"));
+            if (this.checked) {
+              ratingLabels[index].classList.add("selected");
+            }
+          });
+        });
+      });
+    </script>
+    <script id="charts-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        // Weekly Mood Chart
+        const weeklyMoodChart = echarts.init(
+          document.getElementById("weeklyMoodChart"),
+        );
+        const weeklyMoodOption = {
+          animation: false,
+          grid: {
+            top: 10,
+            right: 10,
+            bottom: 20,
+            left: 40,
+          },
+          xAxis: {
+            type: "category",
+            data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+            axisLine: {
+              lineStyle: {
+                color: "#E5E7EB",
+              },
+            },
+            axisLabel: {
+              color: "#6B7280",
+              fontSize: 10,
+            },
+          },
+          yAxis: {
+            type: "value",
+            min: 1,
+            max: 5,
+            interval: 1,
+            axisLine: {
+              show: false,
+            },
+            axisLabel: {
+              color: "#6B7280",
+              fontSize: 10,
+            },
+            splitLine: {
+              lineStyle: {
+                color: "#F3F4F6",
+              },
+            },
+          },
+          series: [
+            {
+              data: [3, 2, 3, 4, 3, 5, 4],
+              type: "line",
+              smooth: true,
+              symbol: "none",
+              lineStyle: {
+                color: "rgba(87, 181, 231, 1)",
+                width: 3,
+              },
+              areaStyle: {
+                color: {
+                  type: "linear",
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [
+                    {
+                      offset: 0,
+                      color: "rgba(87, 181, 231, 0.2)",
+                    },
+                    {
+                      offset: 1,
+                      color: "rgba(87, 181, 231, 0.01)",
+                    },
+                  ],
+                },
+              },
+            },
+          ],
+          tooltip: {
+            trigger: "axis",
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
+            borderColor: "#E5E7EB",
+            textStyle: {
+              color: "#1F2937",
+            },
+          },
+        };
+        weeklyMoodChart.setOption(weeklyMoodOption);
+        // Energy Levels Chart
+        const energyLevelsChart = echarts.init(
+          document.getElementById("energyLevelsChart"),
+        );
+        const energyLevelsOption = {
+          animation: false,
+          grid: {
+            top: 10,
+            right: 10,
+            bottom: 20,
+            left: 40,
+          },
+          xAxis: {
+            type: "category",
+            data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+            axisLine: {
+              lineStyle: {
+                color: "#E5E7EB",
+              },
+            },
+            axisLabel: {
+              color: "#6B7280",
+              fontSize: 10,
+            },
+          },
+          yAxis: {
+            type: "value",
+            min: 1,
+            max: 5,
+            interval: 1,
+            axisLine: {
+              show: false,
+            },
+            axisLabel: {
+              color: "#6B7280",
+              fontSize: 10,
+            },
+            splitLine: {
+              lineStyle: {
+                color: "#F3F4F6",
+              },
+            },
+          },
+          series: [
+            {
+              data: [2, 3, 2, 3, 4, 3, 4],
+              type: "bar",
+              barWidth: "60%",
+              itemStyle: {
+                color: "rgba(141, 211, 199, 1)",
+                borderRadius: [4, 4, 0, 0],
+              },
+            },
+          ],
+          tooltip: {
+            trigger: "axis",
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
+            borderColor: "#E5E7EB",
+            textStyle: {
+              color: "#1F2937",
+            },
+          },
+        };
+        energyLevelsChart.setOption(energyLevelsOption);
+        // Handle window resize
+        window.addEventListener("resize", function () {
+          weeklyMoodChart.resize();
+          energyLevelsChart.resize();
+        });
+      });
+    </script>
+  </body>
+</html>

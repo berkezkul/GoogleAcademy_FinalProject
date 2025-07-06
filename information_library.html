@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Information Library - Hope & Progress Tracker</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#E6F3FF", secondary: "#E8F5E9" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      body {
+          font-family: 'Inter', sans-serif;
+          background-color: #FAFAFA;
+      }
+      .custom-shadow {
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+      .category-tag {
+          display: inline-block;
+          padding: 4px 8px;
+          border-radius: 4px;
+          font-size: 12px;
+          font-weight: 500;
+      }
+      .category-cancer {
+          background-color: #FCE7F3;
+          color: #BE185D;
+      }
+      .category-mental {
+          background-color: #E0E7FF;
+          color: #4338CA;
+      }
+      .category-nutrition {
+          background-color: #ECFDF5;
+          color: #047857;
+      }
+      .category-exercise {
+          background-color: #FEF3C7;
+          color: #B45309;
+      }
+      .article-card {
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      .article-card:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 24px rgba(0, 0, 0, 0.07);
+      }
+      .article-description {
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+      }
+      .article-title {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+      }
+      .category-tabs::-webkit-scrollbar {
+          height: 4px;
+      }
+      .category-tabs::-webkit-scrollbar-track {
+          background: #F3F4F6;
+          border-radius: 4px;
+      }
+      .category-tabs::-webkit-scrollbar-thumb {
+          background: #D1D5DB;
+          border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="min-h-screen flex flex-col">
+      <!-- Top Navigation Bar -->
+      <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div
+          class="container mx-auto px-4 py-3 flex items-center justify-between"
+        >
+          <div class="flex items-center">
+            <h1 class="text-2xl font-['Pacifico'] text-gray-800">Hope</h1>
+          </div>
+          <div class="flex items-center space-x-4">
+            <div
+              class="w-10 h-10 flex items-center justify-center rounded-full bg-primary text-gray-700 cursor-pointer"
+            >
+              <i class="ri-notification-3-line ri-lg"></i>
+            </div>
+            <div
+              class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 cursor-pointer"
+            >
+              <i class="ri-user-line ri-lg"></i>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="flex-grow container mx-auto px-4 py-6">
+        <!-- Page Title -->
+        <div class="mb-6 flex items-center">
+          <a
+            href="index.html"
+            data-readdy="true"
+            class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 mr-3"
+          >
+            <i class="ri-arrow-left-s-line ri-lg"></i>
+          </a>
+          <div>
+            <h2 class="text-2xl font-semibold text-gray-800">
+              Information Library
+            </h2>
+            <p class="text-gray-500">
+              Explore resources to support your health journey
+            </p>
+          </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="mb-6">
+          <div class="relative">
+            <div
+              class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
+            >
+              <i class="ri-search-line text-gray-400"></i>
+            </div>
+            <input
+              type="text"
+              id="search-resources"
+              class="w-full pl-12 pr-4 py-3 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              placeholder="Search health resources..."
+            />
+          </div>
+        </div>
+
+        <!-- Category Tabs -->
+        <div class="mb-6 overflow-x-auto category-tabs">
+          <div class="flex space-x-3 pb-2" style="min-width: max-content;">
+            <button
+              class="px-5 py-2 bg-primary text-gray-700 font-medium rounded-full whitespace-nowrap"
+            >
+              All
+            </button>
+            <button
+              class="px-5 py-2 bg-white text-gray-600 font-medium rounded-full whitespace-nowrap hover:bg-gray-50"
+            >
+              Cancer Resources
+            </button>
+            <button
+              class="px-5 py-2 bg-white text-gray-600 font-medium rounded-full whitespace-nowrap hover:bg-gray-50"
+            >
+              Mental Health
+            </button>
+            <button
+              class="px-5 py-2 bg-white text-gray-600 font-medium rounded-full whitespace-nowrap hover:bg-gray-50"
+            >
+              Nutrition
+            </button>
+            <button
+              class="px-5 py-2 bg-white text-gray-600 font-medium rounded-full whitespace-nowrap hover:bg-gray-50"
+            >
+              Exercise
+            </button>
+          </div>
+        </div>
+
+        <!-- Articles Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          <!-- Cancer Resource Article 1 -->
+          <div
+            class="bg-white rounded-lg custom-shadow overflow-hidden article-card"
+          >
+            <div class="relative">
+              <img
+                src="https://readdy.ai/api/search-image?query=cancer%20treatment%20room%20with%20medical%20equipment%2C%20soft%20lighting%2C%20supportive%20environment%2C%20modern%20hospital%20setting%2C%20high%20quality%20medical%20photography&width=600&height=300&seq=1&orientation=landscape"
+                alt="Understanding Cancer Treatments"
+                class="w-full h-48 object-cover object-top"
+              />
+              <div class="absolute top-3 left-3">
+                <span class="category-tag category-cancer"
+                  >Cancer Resources</span
+                >
+              </div>
+            </div>
+            <div class="p-5">
+              <h3
+                class="text-lg font-semibold text-gray-800 mb-2 article-title"
+              >
+                Understanding Cancer Treatments: A Comprehensive Guide
+              </h3>
+              <p class="text-gray-600 mb-4 article-description">
+                This guide explains different cancer treatment options including
+                chemotherapy, radiation therapy, immunotherapy, and targeted
+                therapy. Learn about what to expect, potential side effects, and
+                how to prepare.
+              </p>
+              <button
+                class="px-4 py-2 bg-primary text-gray-700 font-medium rounded-button hover:bg-blue-100 transition-colors whitespace-nowrap"
+              >
+                Read More
+              </button>
+            </div>
+          </div>
+
+          <!-- Mental Health Article 1 -->
+          <div
+            class="bg-white rounded-lg custom-shadow overflow-hidden article-card"
+          >
+            <div class="relative">
+              <img
+                src="https://readdy.ai/api/search-image?query=peaceful%20meditation%20scene%2C%20person%20meditating%20in%20natural%20light%2C%20calm%20environment%2C%20stress%20reduction%20visualization%2C%20professional%20mental%20health%20photography&width=600&height=300&seq=2&orientation=landscape"
+                alt="Coping with Anxiety"
+                class="w-full h-48 object-cover object-top"
+              />
+              <div class="absolute top-3 left-3">
+                <span class="category-tag category-mental">Mental Health</span>
+              </div>
+            </div>
+            <div class="p-5">
+              <h3
+                class="text-lg font-semibold text-gray-800 mb-2 article-title"
+              >
+                Coping with Anxiety During Cancer Treatment
+              </h3>
+              <p class="text-gray-600 mb-4 article-description">
+                Learn practical techniques for managing anxiety and stress
+                during your cancer journey. This article covers mindfulness
+                practices, breathing exercises, and when to seek professional
+                mental health support.
+              </p>
+              <button
+                class="px-4 py-2 bg-primary text-gray-700 font-medium rounded-button hover:bg-blue-100 transition-colors whitespace-nowrap"
+              >
+                Read More
+              </button>
+            </div>
+          </div>
+
+          <!-- Nutrition Article 1 -->
+          <div
+            class="bg-white rounded-lg custom-shadow overflow-hidden article-card"
+          >
+            <div class="relative">
+              <img
+                src="https://readdy.ai/api/search-image?query=healthy%20balanced%20meal%20with%20colorful%20vegetables%2C%20lean%20protein%2C%20whole%20grains%2C%20beautifully%20arranged%20on%20plate%2C%20bright%20natural%20lighting%2C%20professional%20food%20photography&width=600&height=300&seq=3&orientation=landscape"
+                alt="Nutrition During Treatment"
+                class="w-full h-48 object-cover object-top"
+              />
+              <div class="absolute top-3 left-3">
+                <span class="category-tag category-nutrition">Nutrition</span>
+              </div>
+            </div>
+            <div class="p-5">
+              <h3
+                class="text-lg font-semibold text-gray-800 mb-2 article-title"
+              >
+                Nutrition During Cancer Treatment: What to Eat
+              </h3>
+              <p class="text-gray-600 mb-4 article-description">
+                Discover how proper nutrition can help manage treatment side
+                effects and support your recovery. This guide includes
+                easy-to-prepare recipes, foods to emphasize, and tips for when
+                appetite is low.
+              </p>
+              <button
+                class="px-4 py-2 bg-primary text-gray-700 font-medium rounded-button hover:bg-blue-100 transition-colors whitespace-nowrap"
+              >
+                Read More
+              </button>
+            </div>
+          </div>
+
+          <!-- Exercise Article 1 -->
+          <div
+            class="bg-white rounded-lg custom-shadow overflow-hidden article-card"
+          >
+            <div class="relative">
+              <img
+                src="https://readdy.ai/api/search-image?query=gentle%20exercise%20session%2C%20cancer%20patient%20doing%20light%20physical%20activity%20with%20therapist%2C%20supportive%20indoor%20environment%2C%20soft%20lighting%2C%20professional%20healthcare%20photography&width=600&height=300&seq=4&orientation=landscape"
+                alt="Safe Exercise During Treatment"
+                class="w-full h-48 object-cover object-top"
+              />
+              <div class="absolute top-3 left-3">
+                <span class="category-tag category-exercise">Exercise</span>
+              </div>
+            </div>
+            <div class="p-5">
+              <h3
+                class="text-lg font-semibold text-gray-800 mb-2 article-title"
+              >
+                Safe Exercise During Cancer Treatment
+              </h3>
+              <p class="text-gray-600 mb-4 article-description">
+                Physical activity can improve energy levels and quality of life
+                during treatment. Learn about appropriate exercises, how to
+                start safely, and when to rest. Includes modified routines for
+                different ability levels.
+              </p>
+              <button
+                class="px-4 py-2 bg-primary text-gray-700 font-medium rounded-button hover:bg-blue-100 transition-colors whitespace-nowrap"
+              >
+                Read More
+              </button>
+            </div>
+          </div>
+
+          <!-- Cancer Resource Article 2 -->
+          <div
+            class="bg-white rounded-lg custom-shadow overflow-hidden article-card"
+          >
+            <div class="relative">
+              <img
+                src="https://readdy.ai/api/search-image?query=supportive%20cancer%20care%20team%20meeting%20with%20patient%2C%20doctor%20explaining%20information%2C%20compassionate%20interaction%2C%20bright%20medical%20office%2C%20professional%20healthcare%20photography&width=600&height=300&seq=5&orientation=landscape"
+                alt="Communicating with Your Care Team"
+                class="w-full h-48 object-cover object-top"
+              />
+              <div class="absolute top-3 left-3">
+                <span class="category-tag category-cancer"
+                  >Cancer Resources</span
+                >
+              </div>
+            </div>
+            <div class="p-5">
+              <h3
+                class="text-lg font-semibold text-gray-800 mb-2 article-title"
+              >
+                Communicating Effectively with Your Cancer Care Team
+              </h3>
+              <p class="text-gray-600 mb-4 article-description">
+                Build a strong partnership with your healthcare providers by
+                learning how to ask the right questions, track symptoms, and
+                advocate for your needs. Includes a printable question checklist
+                for appointments.
+              </p>
+              <button
+                class="px-4 py-2 bg-primary text-gray-700 font-medium rounded-button hover:bg-blue-100 transition-colors whitespace-nowrap"
+              >
+                Read More
+              </button>
+            </div>
+          </div>
+
+          <!-- Mental Health Article 2 -->
+          <div
+            class="bg-white rounded-lg custom-shadow overflow-hidden article-card"
+          >
+            <div class="relative">
+              <img
+                src="https://readdy.ai/api/search-image?query=supportive%20group%20therapy%20session%2C%20diverse%20people%20in%20circle%20sharing%20experiences%2C%20warm%20inviting%20room%2C%20emotional%20support%20visualization%2C%20professional%20counseling%20photography&width=600&height=300&seq=6&orientation=landscape"
+                alt="Support Groups"
+                class="w-full h-48 object-cover object-top"
+              />
+              <div class="absolute top-3 left-3">
+                <span class="category-tag category-mental">Mental Health</span>
+              </div>
+            </div>
+            <div class="p-5">
+              <h3
+                class="text-lg font-semibold text-gray-800 mb-2 article-title"
+              >
+                Finding the Right Support Group: Virtual and In-Person Options
+              </h3>
+              <p class="text-gray-600 mb-4 article-description">
+                Connecting with others who understand your experience can reduce
+                feelings of isolation. This guide helps you find the right
+                support community and explains what to expect in both online and
+                in-person groups.
+              </p>
+              <button
+                class="px-4 py-2 bg-primary text-gray-700 font-medium rounded-button hover:bg-blue-100 transition-colors whitespace-nowrap"
+              >
+                Read More
+              </button>
+            </div>
+          </div>
+
+          <!-- Nutrition Article 2 -->
+          <div
+            class="bg-white rounded-lg custom-shadow overflow-hidden article-card"
+          >
+            <div class="relative">
+              <img
+                src="https://readdy.ai/api/search-image?query=nutritionist%20consulting%20with%20cancer%20patient%2C%20discussing%20meal%20plans%2C%20healthy%20food%20samples%20on%20table%2C%20bright%20clinical%20setting%2C%20professional%20dietary%20consultation%20photography&width=600&height=300&seq=7&orientation=landscape"
+                alt="Managing Treatment Side Effects"
+                class="w-full h-48 object-cover object-top"
+              />
+              <div class="absolute top-3 left-3">
+                <span class="category-tag category-nutrition">Nutrition</span>
+              </div>
+            </div>
+            <div class="p-5">
+              <h3
+                class="text-lg font-semibold text-gray-800 mb-2 article-title"
+              >
+                Managing Treatment Side Effects Through Nutrition
+              </h3>
+              <p class="text-gray-600 mb-4 article-description">
+                Learn dietary strategies to help manage common side effects like
+                nausea, taste changes, and fatigue. This practical guide
+                includes food substitutions, meal timing tips, and hydration
+                recommendations.
+              </p>
+              <button
+                class="px-4 py-2 bg-primary text-gray-700 font-medium rounded-button hover:bg-blue-100 transition-colors whitespace-nowrap"
+              >
+                Read More
+              </button>
+            </div>
+          </div>
+
+          <!-- Exercise Article 2 -->
+          <div
+            class="bg-white rounded-lg custom-shadow overflow-hidden article-card"
+          >
+            <div class="relative">
+              <img
+                src="https://readdy.ai/api/search-image?query=gentle%20yoga%20class%20for%20cancer%20patients%2C%20modified%20poses%2C%20supportive%20instructor%2C%20bright%20airy%20studio%2C%20professional%20wellness%20photography&width=600&height=300&seq=8&orientation=landscape"
+                alt="Gentle Yoga for Recovery"
+                class="w-full h-48 object-cover object-top"
+              />
+              <div class="absolute top-3 left-3">
+                <span class="category-tag category-exercise">Exercise</span>
+              </div>
+            </div>
+            <div class="p-5">
+              <h3
+                class="text-lg font-semibold text-gray-800 mb-2 article-title"
+              >
+                Gentle Yoga Practices for Cancer Recovery
+              </h3>
+              <p class="text-gray-600 mb-4 article-description">
+                Explore how modified yoga can improve flexibility, reduce
+                stress, and enhance sleep quality during and after treatment.
+                Includes illustrated poses and breathing techniques suitable for
+                all experience levels.
+              </p>
+              <button
+                class="px-4 py-2 bg-primary text-gray-700 font-medium rounded-button hover:bg-blue-100 transition-colors whitespace-nowrap"
+              >
+                Read More
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Bottom Navigation -->
+      <footer class="bg-white shadow-lg py-3 mt-auto">
+        <div class="container mx-auto px-4">
+          <div class="flex justify-around">
+            <a
+              href="index.html"
+              data-readdy="true"
+              class="flex flex-col items-center"
+            >
+              <div
+                class="w-10 h-10 flex items-center justify-center rounded-full text-gray-400"
+              >
+                <i class="ri-home-line ri-lg"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-400 mt-1">Home</span>
+            </a>
+            <a
+              href="progress.html"
+              data-readdy="true"
+              class="flex flex-col items-center"
+            >
+            <div class="flex flex-col items-center">
+              <div
+                class="w-10 h-10 flex items-center justify-center rounded-full text-gray-400"
+              >
+                <i class="ri-line-chart-line ri-lg"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-400 mt-1"
+                >Progress</span
+              >
+            </div>
+            <a
+              href="information_library.html"
+              data-readdy="true"
+              class="flex flex-col items-center"
+            >
+              <div
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-primary text-gray-700"
+              >
+                <i class="ri-book-open-line ri-lg"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-700 mt-1"
+                >Library</span
+              >
+            </a>
+            <div class="flex flex-col items-center">
+              <div
+                class="w-10 h-10 flex items-center justify-center rounded-full text-gray-400"
+              >
+                <i class="ri-user-settings-line ri-lg"></i>
+              </div>
+              <span class="text-xs font-medium text-gray-400 mt-1"
+                >Profile</span
+              >
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script id="search-filter-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("search-resources");
+        const articleCards = document.querySelectorAll(".article-card");
+
+        searchInput.addEventListener("input", function () {
+          const searchTerm = this.value.toLowerCase().trim();
+
+          articleCards.forEach((card) => {
+            const title = card
+              .querySelector(".article-title")
+              .textContent.toLowerCase();
+            const description = card
+              .querySelector(".article-description")
+              .textContent.toLowerCase();
+            const category = card
+              .querySelector(".category-tag")
+              .textContent.toLowerCase();
+
+            if (
+              title.includes(searchTerm) ||
+              description.includes(searchTerm) ||
+              category.includes(searchTerm)
+            ) {
+              card.style.display = "block";
+            } else {
+              card.style.display = "none";
+            }
+          });
+        });
+      });
+    </script>
+
+    <script id="category-tabs-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        const categoryButtons = document.querySelectorAll(".category-tabs button");
+        const articleCards = document.querySelectorAll(".article-card");
+
+        categoryButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            // Update active button styles
+            categoryButtons.forEach((btn) => {
+              btn.classList.remove("bg-primary", "text-gray-700");
+              btn.classList.add("bg-white", "text-gray-600");
+            });
+            this.classList.remove("bg-white", "text-gray-600");
+            this.classList.add("bg-primary", "text-gray-700");
+
+            const selectedCategory = this.textContent.trim();
+
+            // Filter articles
+            if (selectedCategory === "All") {
+              articleCards.forEach((card) => {
+                card.style.display = "block";
+              });
+            } else {
+              articleCards.forEach((card) => {
+                const cardCategory = card
+                  .querySelector(".category-tag")
+                  .textContent.trim();
+                if (cardCategory === selectedCategory) {
+                  card.style.display = "block";
+                } else {
+                  card.style.display = "none";
+                }
+              });
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
