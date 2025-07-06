@@ -10,7 +10,7 @@ Grup 176
 
 - Berke Özkul: Product Owner & Developer
 - Emirhan Akbal: Developer
-- Fatma: Developer
+- |F|: Developer
 - Beytullah Duman: Developer
 - Safiye Özmen: Developer
 
