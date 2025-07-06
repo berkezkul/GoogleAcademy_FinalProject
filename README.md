@@ -75,9 +75,7 @@ Hope & Progress Tracker uygulamamız ile kanser tedavisi gören hastaların sağ
 
 
 
-## Product Backlog URL
-
-[Miro Backlog Board](https://miro.com/app/board/uXjVOSSCpsI=/)
+## Product Backlog 
 
 ---
 
