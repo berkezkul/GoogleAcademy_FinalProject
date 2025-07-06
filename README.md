@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 # GoogleAcademy_FinalProject
 
 # **Takım İsmi**
@@ -15,6 +16,9 @@ Grup 176
 ## Ürün İsmi
 
 --Hope & Progress Tracker--
+=======
+# Hope & Progress Tracker
+>>>>>>> Stashed changes
 
 ## Ürün Açıklaması
 
@@ -28,7 +32,10 @@ Hope & Progress Tracker uygulamamız ile kanser tedavisi gören hastaların sağ
 - **Kategori Bazlı Filtreleme**: İhtiyaca göre kaynakları kategorilere ayırma (Kanser Kaynakları, Mental Sağlık, Beslenme, Egzersiz)
 - **Arama Fonksiyonu**: Hızlı ve kolay kaynak bulma
 - **Kullanıcı Dostu Arayüz**: Modern ve erişilebilir tasarım
+<<<<<<< Updated upstream
 - **Yapay Zeka ile Durum Analizi ve Öneri Sunma**: Hastanın vereceği bilgilere göre ona iyi gelebilecek her türlü öneri sunulma
+=======
+>>>>>>> Stashed changes
 
 ### Bilgi Kütüphanesi İçeriği
 - **Kanser Kaynakları**: Tedavi seçenekleri, yan etkiler, doktor iletişimi rehberleri
@@ -40,6 +47,7 @@ Hope & Progress Tracker uygulamamız ile kanser tedavisi gören hastaların sağ
 - Responsive tasarım (mobil ve masaüstü uyumlu)
 - Gerçek zamanlı arama ve filtreleme
 - Kategorize edilmiş içerik yönetimi
+<<<<<<< Updated upstream
 
 ## Product Backlog URL
 
@@ -90,3 +98,52 @@ Alınan kararlar: YAZILACAK ......
 # Sprint 3
 
 ---
+=======
+- Modern UI/UX tasarımı (Tailwind CSS)
+- Remix Icon entegrasyonu
+
+## Hedef Kitle
+
+- **Kanser hastaları** ve tedavi sürecindeki bireyler
+- **Hasta yakınları** ve bakım verenler
+- **Sağlık profesyonelleri** (doktorlar, hemşireler, terapistler)
+- **Kanser destek grupları** ve organizasyonları
+- **Sağlık bilgisi arayan** genel kullanıcılar
+- **18 - 80 yaş arası** kullanıcılar
+
+## Kullanım Senaryoları
+
+1. **Yeni Teşhis Edilen Hastalar**: Tedavi süreci hakkında bilgi edinme
+2. **Tedavi Sürecindeki Hastalar**: İlerleme takibi ve yan etki yönetimi
+3. **İyileşme Dönemindeki Hastalar**: Sağlıklı yaşam tarzı benimseme
+4. **Hasta Yakınları**: Sevdiklerine nasıl destek olacaklarını öğrenme
+5. **Sağlık Profesyonelleri**: Hasta eğitimi için kaynak bulma
+
+## Teknoloji Stack
+
+- **Frontend**: HTML5, CSS3, JavaScript
+- **Styling**: Tailwind CSS
+- **Icons**: Remix Icon
+- **Fonts**: Inter, Pacifico (Google Fonts)
+- **Responsive Design**: Mobile-first approach
+
+## Proje Yapısı
+
+```
+GoogleAcademy_FinalProject/
+├── index.html              # Ana sayfa
+├── progress.html           # İlerleme takip sayfası
+├── information_library.html # Bilgi kütüphanesi
+└── README.md              # Proje dokümantasyonu
+```
+
+## Gelecek Geliştirmeler
+
+- Kullanıcı hesap sistemi
+- Kişiselleştirilmiş içerik önerileri
+- Bildirim sistemi
+- Sosyal özellikler (forum, yorumlar)
+- Çoklu dil desteği
+- Offline içerik erişimi
+- Telefon uygulaması versiyonu
+>>>>>>> Stashed changes
