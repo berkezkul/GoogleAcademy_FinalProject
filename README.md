@@ -94,12 +94,12 @@ Hope & Progress Tracker uygulamamız ile kanser tedavisi gören hastaların sağ
 ![Library](https://github.com/berkezkul/GoogleAcademy_FinalProject/blob/main/sprint1/product_images/hope_library.png)
 
 - **Sprint Review**: 
-Alınan kararlar: Biri cumartesi olmak üzere haftada en az 2 toplantı yapılacak. Whatsapp üzerinden iletişim sağlanacak.
+Alınan kararlar:
+  - Biri cumartesi olmak üzere haftada en az 2 toplantı yapılacak. Whatsapp üzerinden iletişim sağlanacak.
 
 - **Sprint Retrospective:**
   - Takım içindeki görev dağılımıyla ilgili düzenleme yapılması kararı alınmıştır
-  - Madde 2
-  - Madde 3 
+ 
 
 -**Diğer Notlar**:
 - N/A
