@@ -8,9 +8,11 @@ Grup 176
 
 ## Takım Elemanları
 
-- Berke Özkul: Product Owner
+- Berke Özkul: Product Owner & Developer
 - Emirhan Akbal: Developer
-- Atıl Samancıoğlu: Team Member/Developer
+- Fatma: Developer
+- Beytullah Duman: Developer
+- Safiye Özmen: Developer
 
 ## Ürün İsmi
 
@@ -42,61 +44,7 @@ Hope & Progress Tracker uygulamamız ile kanser tedavisi gören hastaların sağ
 - Responsive tasarım (mobil ve masaüstü uyumlu)
 - Gerçek zamanlı arama ve filtreleme
 - Kategorize edilmiş içerik yönetimi
-
-## Product Backlog URL
-
-[Miro Backlog Board](https://miro.com/app/board/uXjVOSSCpsI=/)
-
----
-
-# Sprint 1
-
-- **Sprint Notları**: User Story'ler product backlog'ların içine yazılmıştır. Product backlog item'lara tıklandığında hikayelerin detayları okunabilir.
-
-- **Sprint içinde tamamlanması tahmin edilen puan**: 100 Puan
-
-- **Puan tamamlama mantığı**: Toplamda proje boyunca tamamlanması gereken 380 puanlık backlog bulunmaktadır. 4 sprint'e bölündüğünde ilk sprint'in en azından 100 ile başlaması gerektiğine karar verildi.
-
-- **Backlog düzeni ve Story seçimleri**: Backlog'umuz ilk yapılacak story'lere göre düzenlenmiştir. Sprint başına tahmin edilen puan sayısını geçmeyecek şekilde sıradan seçimler yapılmaktadır. Story başına çıkan tahmin puanı, toplam puanın yarısından az tutulmuştur. 
-
-Story'ler yapılacak işlere (task'lere) bölünmüştür. Miro Board'da gözüken kırmızı item'lar yapılacak işleri (task) gösterirken, mavi item'lar story'leri temsil etmektedir.
-
-- **Daily Scrum**: Daily Scrum toplantılarının zamansal sebeplerden ötürü Slack üzerinden yapılmasına karar verilmiştir. Daily Scrum toplantısı örneği jpeg veya word olarak Readme'de tarafımızdan paylaşılmaktadır: [Sprint 1 Daily Scrum Chats](https://github.com/OyunveUygulamaAkademisi/BootcampScrumTemplate/blob/main/ProjectManagement/Sprint1Documents/DailyScrumMeetingNotesSprint1.docx?raw=true)
-
-- **Sprint board update**: Sprint board screenshotları: 
-![Sprint1](https://github.com/berkezkul/GoogleAcademy_FinalProject/blob/main/sprint1/sprint1.png) 
-
-
-- **Ürün Durumu**: Ekran görüntüleri:
-![Homepage](https://github.com/berkezkul/GoogleAcademy_FinalProject/blob/main/sprint1/product_images/hope_index.png)
-![Progress & Datas Page](https://github.com/berkezkul/GoogleAcademy_FinalProject/blob/main/sprint1/product_images/hope_progress.png)
-![Library](https://github.com/berkezkul/GoogleAcademy_FinalProject/blob/main/sprint1/product_images/hope_library.png)
-
-- **Sprint Review**: 
-Alınan kararlar: YAZILACAK ......
-
-- **Sprint Retrospective:**
-  - Takım içindeki görev dağılımıyla ilgili düzenleme yapılması kararı alınmıştır
-  - Madde 2
-  - Madde 3 
-
--**Diğer Notlar**:
-- N/A
-
----
-
-# Sprint 2
-
-
----
-
-# Sprint 3
-
----
-=======
-- Modern UI/UX tasarımı (Tailwind CSS)
-- Remix Icon entegrasyonu
-
+  
 ## Hedef Kitle
 
 - **Kanser hastaları** ve tedavi sürecindeki bireyler
@@ -117,28 +65,54 @@ Alınan kararlar: YAZILACAK ......
 ## Teknoloji Stack
 
 - **Frontend**: HTML5, CSS3, JavaScript
+- **Database**: Firebase, SQL
+- **Data Analyst**: Pandas, Numpy, Scikit-learn
+- **AI**: Gemini
 - **Styling**: Tailwind CSS
 - **Icons**: Remix Icon
 - **Fonts**: Inter, Pacifico (Google Fonts)
 - **Responsive Design**: Mobile-first approach
 
-## Proje Yapısı
 
-```
-GoogleAcademy_FinalProject/
-├── index.html              # Ana sayfa
-├── progress.html           # İlerleme takip sayfası
-├── information_library.html # Bilgi kütüphanesi
-└── README.md              # Proje dokümantasyonu
-```
 
-## Gelecek Geliştirmeler
+## Product Backlog URL
 
-- Kullanıcı hesap sistemi
-- Kişiselleştirilmiş içerik önerileri
-- Bildirim sistemi
-- Sosyal özellikler (forum, yorumlar)
-- Çoklu dil desteği
-- Offline içerik erişimi
-- Telefon uygulaması versiyonu
->>>>>>> Stashed changes
+[Miro Backlog Board](https://miro.com/app/board/uXjVOSSCpsI=/)
+
+---
+
+# Sprint 1
+
+- **Sprint Notları**: User Story'ler product backlog'ların içine yazılmıştır. Ve her bir user story için [US1] gibi etiketler belirtilmiştir. Task lar da hangi user story ile ilgiliyse o etiket eklenmiştir. 
+
+- **Sprint board update**: Sprint board screenshotları:
+  
+![Sprint1](https://github.com/berkezkul/GoogleAcademy_FinalProject/blob/main/sprint1/sprint1.png) 
+
+
+- **Ürün Durumu**: Ekran görüntüleri:
+![Homepage](https://github.com/berkezkul/GoogleAcademy_FinalProject/blob/main/sprint1/product_images/hope_index.png)
+![Progress & Datas Page](https://github.com/berkezkul/GoogleAcademy_FinalProject/blob/main/sprint1/product_images/hope_progress.png)
+![Library](https://github.com/berkezkul/GoogleAcademy_FinalProject/blob/main/sprint1/product_images/hope_library.png)
+
+- **Sprint Review**: 
+Alınan kararlar: Biri cumartesi olmak üzere haftada en az 2 toplantı yapılacak. Whatsapp üzerinden iletişim sağlanacak.
+
+- **Sprint Retrospective:**
+  - Takım içindeki görev dağılımıyla ilgili düzenleme yapılması kararı alınmıştır
+  - Madde 2
+  - Madde 3 
+
+-**Diğer Notlar**:
+- N/A
+
+---
+
+# Sprint 2
+
+
+---
+
+# Sprint 3
+
+---
