@@ -8,7 +8,7 @@ Grup 176
 
 ## Takım Elemanları
 
-- Berke Özkul: Product Owner & Developer
+- Berke Özkul: Scrum Master & Developer
 - Emirhan Akbal: Developer
 - |F|: Developer
 - Beytullah Duman: Developer
