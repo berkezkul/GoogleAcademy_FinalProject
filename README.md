@@ -1,4 +1,4 @@
-# GoogleAcademy_FinalProject
+# Google Academy Final Project
 
 # **Takım İsmi**
 
