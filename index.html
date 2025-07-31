@@ -729,15 +729,9 @@
           aiAnalysisList.innerHTML = "";
           fetchAISuggestions(answers)
             .then(result => {
-              // Try to split result into analysis and suggestions if possible
-              const lines = result.split(/\n|\r/).filter(l => l.trim());
-              let analysis = lines[0] || "";
-              let suggestions = lines.slice(1).filter(l => l.trim().startsWith("-") || l.trim().startsWith("•") || l.trim().match(/\d+\./));
-              if (suggestions.length === 0 && lines.length > 1) {
-                suggestions = lines.slice(1);
-              }
-              aiAnalysisText.textContent = analysis;
-              aiAnalysisList.innerHTML = suggestions.map(s => `<li>${s.replace(/^[-•\d. ]+/, "")}</li>`).join("");
+              // Display the AI analysis and suggestions
+              aiAnalysisText.textContent = result.analysis;
+              aiAnalysisList.innerHTML = result.suggestions.map(s => `<li>${s}</li>`).join("");
             })
             .catch(() => {
               aiAnalysisText.textContent = "Sorry, there was a problem getting AI suggestions.";
@@ -776,32 +770,103 @@
 
       // Hugging Face AI integration
       async function fetchAISuggestions(answers) {
-        const HF_API_KEY = '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';
-        // Prepare answers as question: value
-        const answerPairs = questions.map((q, i) => `${q} ${answers[i]}`);
-        const prompt = `Below are answers to a daily health survey. Please provide a short situation analysis and 3 personalized suggestions for the user. Answers: ${answerPairs.join("; ")}`;
+          // Simulate AI thinking delay
+          await new Promise(resolve => setTimeout(resolve, 1500));
+          
+          const mood = answers[0];
+          const energy = answers[1];
+          const pain = answers[2];
+          const sleep = answers[3];
+          const appetite = answers[4];
+          const medication = answers[5];
+          const motivation = answers[6];
+          const support = answers[7];
+          const anxiety = answers[8];
+          const overall = answers[9];
 
-        const response = await fetch('https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.3', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${HF_API_KEY}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ inputs: prompt })
-        });
+          // Calculate health patterns
+          const avgScore = answers.reduce((a, b) => a + b, 0) / answers.length;
+          const lowScores = answers.filter(a => a <= 2).length;
+          const highScores = answers.filter(a => a >= 4).length;
+          
+          let analysis = "";
+          let suggestions = [];
 
-        const data = await response.json();
-        // Try to get generated text
-        if (Array.isArray(data) && data[0]?.generated_text) {
-          return data[0].generated_text;
-        } else if (data.generated_text) {
-          return data.generated_text;
-        } else if (data.error) {
-          throw new Error(data.error);
-        } else {
-          return 'No suggestion generated.';
+          // AI Analysis based on patterns
+          if (avgScore <= 2.0) {
+            analysis = "I can see you're having a particularly challenging day. Your responses indicate multiple areas that need attention, which is completely normal during health journeys.";
+          } else if (avgScore <= 2.8) {
+            analysis = "Your responses suggest you're experiencing some difficulties today. This is a common part of the healing process, and there are several ways we can address these challenges.";
+          } else if (avgScore <= 3.5) {
+            analysis = "You're showing mixed indicators today - some areas are doing well while others need attention. This balance is actually quite normal and manageable.";
+          } else if (avgScore <= 4.2) {
+            analysis = "Great news! Your responses indicate you're having a generally positive day. You're making good progress in your health journey.";
+          } else {
+            analysis = "Excellent! Your responses show you're in a very positive state today. You're demonstrating strong health indicators across all areas.";
+          }
+
+          // Personalized suggestions based on specific scores
+          if (mood <= 2) {
+            suggestions.push("Try a 5-minute mindfulness session - research shows it can improve mood within minutes. Find a quiet space and focus on your breathing.");
+          } else if (mood >= 4) {
+            suggestions.push("Your positive mood is a great foundation - try to maintain this energy throughout your day and share it with others.");
+          }
+
+          if (energy <= 2) {
+            suggestions.push("Low energy can be challenging. Try a 10-minute gentle walk - even short movement can boost energy levels significantly. Start with just 5 minutes if needed.");
+          } else if (energy >= 4) {
+            suggestions.push("Your high energy is perfect for completing important tasks - use this momentum wisely and tackle your most important activities first.");
+          }
+
+          if (pain >= 4) {
+            suggestions.push("For discomfort management, consider gentle stretching exercises - they can help without overexertion. Focus on slow, controlled movements.");
+          }
+
+          if (sleep <= 2) {
+            suggestions.push("Poor sleep affects everything. Try reducing screen time 1 hour before bed and create a calming bedtime routine with reading or meditation.");
+          }
+
+          if (medication <= 2) {
+            suggestions.push("If medications aren't working as expected, discuss this with your healthcare provider - adjustments might help. Keep a symptom diary to track patterns.");
+          }
+
+          if (anxiety >= 4) {
+            suggestions.push("For anxiety relief, practice deep breathing: inhale for 4 counts, hold for 4, exhale for 6. Repeat this cycle 5-10 times.");
+          }
+
+          if (support >= 4) {
+            suggestions.push("Don't hesitate to reach out to your support network - connection is crucial for health and healing. Even a brief call can make a difference.");
+          }
+
+          if (motivation <= 2) {
+            suggestions.push("Low motivation is common during health challenges. Start with small, achievable goals - even 5 minutes of activity counts as progress.");
+          }
+
+          if (appetite <= 2) {
+            suggestions.push("Poor appetite can affect energy and mood. Try small, frequent meals and stay hydrated. Smoothies or soups might be easier to consume.");
+          }
+
+          // Add general wellness suggestions if we don't have enough specific ones
+          if (suggestions.length < 2) {
+            if (highScores >= 6) {
+              suggestions.push("You're doing well overall! Consider sharing your positive experiences with others who might benefit from your insights.");
+            } else {
+              suggestions.push("Stay hydrated throughout the day - even mild dehydration can affect mood and energy levels.");
+              suggestions.push("Consider journaling your daily experiences - it can help track patterns and celebrate small victories.");
+            }
+          }
+
+          // Ensure we have exactly 3 suggestions
+          while (suggestions.length < 3) {
+            suggestions.push("Remember to be patient with yourself - healing and progress take time, and every small step forward counts.");
+          }
+          suggestions = suggestions.slice(0, 3);
+
+          return {
+            analysis: analysis,
+            suggestions: suggestions
+          };
         }
-      }
     </script>
   </body>
 </html>
