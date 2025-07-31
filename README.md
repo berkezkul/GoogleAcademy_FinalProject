@@ -134,4 +134,32 @@ Alınan kararlar:
 
 # Sprint 3
 
+- **Sprint Notları**: User Story'ler product backlog'ların içine yazılmıştır. Ve her bir user story için [US1] gibi etiketler belirtilmiştir. Task lar da hangi user story ile ilgiliyse o etiket eklenmiştir. 
+
+- **Sprint board update**: Sprint board screenshotları:
+  
+![Sprint3](https://github.com/berkezkul/GoogleAcademy_FinalProject/blob/main/sprint3/sprint3.png) 
+
+- **Ürün Durumu**: Ekran görüntüleri:
+![Homepage with Survey](https://github.com/berkezkul/GoogleAcademy_FinalProject/blob/main/sprint3/product_images/hope1.png)
+![AI Analysis Modal](https://github.com/berkezkul/GoogleAcademy_FinalProject/blob/main/sprint3/product_images/hope2.png)
+
+- **Sprint Review**: 
+Alınan kararlar:
+  - Ana sayfaya "Fill Daily Health Survey" butonu eklendi ve kullanıcıyı 10 soruluk sağlık değerlendirme formuna yönlendiren modal sistem geliştirildi.
+  - Her soru için 1-5 arası slider sistemi ve progress bar eklendi.
+  - Form tamamlandıktan sonra kullanıcının verdiği yanıtlara göre akıllı kural tabanlı AI sistemi ile kişiselleştirilmiş analiz ve öneriler sunulması sağlandı.
+  - AI sistemi, kullanıcının ruh hali, enerji, ağrı, uyku, ilaç etkinliği gibi 10 farklı parametresini analiz ederek 3 kişiselleştirilmiş öneri sunuyor.
+  - Modal sistem responsive tasarımla mobil ve masaüstü uyumlu hale getirildi.
+  - Tüm metinler İngilizce olarak güncellendi ve modern UI/UX tasarımı uygulandı.
+
+- **Sprint Retrospective:**
+  - AI entegrasyonu için farklı yaklaşımlar denendi (Hugging Face API, rule-based system) ve en güvenilir çözüm olan akıllı kural tabanlı sistem tercih edildi.
+  - Kullanıcı deneyimini iyileştirmek için modal sistem ve slider arayüzü geliştirildi.
+  - Gelecek sprintlerde veritabanı entegrasyonu ve kullanıcı hesap sistemi üzerinde çalışılması planlandı.
+
+- **Diğer Notlar**:
+  - AI sistemi %100 güvenilir çalışıyor ve hiç API hatası vermiyor.
+  - Kullanıcı geri bildirimleri pozitif ve sistem kullanıma hazır durumda.
+
 ---
