@@ -109,6 +109,27 @@ Alınan kararlar:
 # Sprint 2
 
 
+- **Sprint board update**: Sprint board screenshotları:
+  
+![Sprint2](https://github.com/berkezkul/GoogleAcademy_FinalProject/blob/main/sprint2/sprint2.PNG)
+
+
+- **Sprint Review**: 
+Alınan kararlar:
+  - Ana sayfaya bir buton eklenerek kullanıcıyı 1’den 5’e kadar derecelendirme yapabileceği ruh hali ve fiziksel durum gibi sorularla yönlendiren bir sağlık değerlendirme formu oluşturuldu.
+  - Form tamamlandıktan sonra kullanıcının verdiği yanıtlara göre yapay zeka destekli geri bildirim ve öneri sunulması hedeflendi.
+  - Hugging Face üzerindeki ücretsiz modellerden biri entegre edilmeye çalışıldı, ancak hata alındı. Model entegrasyonu yeniden değerlendirilecek.
+  - FastAPI ile kullanıcı girişini işlemek için endpoint oluşturuldu. 
+  - Veritabanı bağlantıları yapılacak.
+
+
+- **Sprint Retrospective:**
+  - Takım içindeki görev dağılımıyla ilgili düzenleme yapılması kararı alınmıştır.
+  - Takım üyelerinin gelecek sprintlerde daha fazla aktif olması gerektiğine vurgu yapılmıştır.
+
+ 
+
+
 ---
 
 # Sprint 3
