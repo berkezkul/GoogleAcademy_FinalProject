@@ -156,10 +156,9 @@ Alınan kararlar:
 - **Sprint Retrospective:**
   - AI entegrasyonu için farklı yaklaşımlar denendi (Hugging Face API, rule-based system) ve en güvenilir çözüm olan akıllı kural tabanlı sistem tercih edildi.
   - Kullanıcı deneyimini iyileştirmek için modal sistem ve slider arayüzü geliştirildi.
-  - Gelecek sprintlerde veritabanı entegrasyonu ve kullanıcı hesap sistemi üzerinde çalışılması planlandı.
+  
 
 - **Diğer Notlar**:
-  - AI sistemi %100 güvenilir çalışıyor ve hiç API hatası vermiyor.
   - Kullanıcı geri bildirimleri pozitif ve sistem kullanıma hazır durumda.
 
 ---
