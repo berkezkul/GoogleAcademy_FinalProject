@@ -138,13 +138,17 @@ Alınan kararlar:
 
 - **Sprint board update**: Sprint board screenshotları:
   
-![Sprint3](https://github.com/berkezkul/GoogleAcademy_FinalProject/blob/main/sprint3/sprint3.png) 
+![Sprint3](https://github.com/berkezkul/GoogleAcademy_FinalProject/blob/main/sprint3/sprint3.PNG) 
 
 - **Ürün Durumu**: Ekran görüntüleri:
 ![Homepage with Survey](https://github.com/berkezkul/GoogleAcademy_FinalProject/blob/main/sprint3/product_images/hope1.png)
 ![AI Analysis Modal](https://github.com/berkezkul/GoogleAcademy_FinalProject/blob/main/sprint3/product_images/hope2.png)
+![Login](https://github.com/berkezkul/GoogleAcademy_FinalProject/blob/main/sprint3/product_images/login.PNG)
+![Register](https://github.com/berkezkul/GoogleAcademy_FinalProject/blob/main/sprint3/product_images/register.PNG)
+![Gif](https://github.com/berkezkul/GoogleAcademy_FinalProject/blob/main/sprint3/product_images/login.gif)
 
-- **Sprint Review**: 
+
+- **Sprint Review**:
 Alınan kararlar:
   - Ana sayfaya "Fill Daily Health Survey" butonu eklendi ve kullanıcıyı 10 soruluk sağlık değerlendirme formuna yönlendiren modal sistem geliştirildi.
   - Her soru için 1-5 arası slider sistemi ve progress bar eklendi.
@@ -152,10 +156,20 @@ Alınan kararlar:
   - AI sistemi, kullanıcının ruh hali, enerji, ağrı, uyku, ilaç etkinliği gibi 10 farklı parametresini analiz ederek 3 kişiselleştirilmiş öneri sunuyor.
   - Modal sistem responsive tasarımla mobil ve masaüstü uyumlu hale getirildi.
   - Tüm metinler İngilizce olarak güncellendi ve modern UI/UX tasarımı uygulandı.
+  - Basit bir giriş sayfası geliştirildi.
+  - Kayıt sayfası tasarlandı ama tam olarak bağlanmadı.
+  - FastAPI endpointleri e-posta/şifre temelli girişle entegre edildi.
+  - Başarılı giriş sonrası JWT erişim token’ı üretildi.
+  - FastAPI route’ları test edildi.
+  - Veritabanı bağlantıları yapılacak.
+
+
 
 - **Sprint Retrospective:**
   - AI entegrasyonu için farklı yaklaşımlar denendi (Hugging Face API, rule-based system) ve en güvenilir çözüm olan akıllı kural tabanlı sistem tercih edildi.
   - Kullanıcı deneyimini iyileştirmek için modal sistem ve slider arayüzü geliştirildi.
+  - Kullanıcı giriş formuyla sisteme giriş yapabiliyor ve Home sayfasına yönlendiriliyor.
+  - Başarılı girişten sonra erişim token’ı düzgün şekilde üretiliyor.
   
 
 - **Diğer Notlar**:
