@@ -70,7 +70,6 @@
   </head>
   <body>
     <div class="min-h-screen flex flex-col">
-      <!-- Top Navigation Bar -->
       <header class="bg-white shadow-sm sticky top-0 z-50">
         <div
           class="container mx-auto px-4 py-3 flex items-center justify-between"
@@ -92,22 +91,18 @@
           </div>
         </div>
       </header>
-      <!-- Main Content -->
       <main class="flex-grow container mx-auto px-4 py-6">
-        <!-- Greeting and Date -->
         <div class="mb-8">
           <h2 class="text-2xl font-semibold text-gray-800">
             Good Morning, Emily
           </h2>
           <p class="text-gray-500">July 6, 2025 | Sunday</p>
         </div>
-        <!-- Daily Survey Start Button -->
         <div class="flex justify-center mb-8">
           <button id="open-survey-btn" class="px-8 py-3 bg-primary text-gray-700 font-semibold rounded-button shadow hover:bg-blue-100 transition-colors text-lg">
             Fill Daily Health Survey
           </button>
         </div>
-        <!-- How Are You Today Module -->
         <div class="bg-white rounded-lg custom-shadow p-6 mb-8">
           <h3 class="text-xl font-medium text-gray-800 mb-4">
             How are you feeling today?
@@ -180,7 +175,6 @@
             </button>
           </div>
         </div>
-        <!-- AI Suggestion Card -->
         <div class="gradient-card rounded-lg custom-shadow p-6 mb-8">
           <div class="flex items-start">
             <div
@@ -213,7 +207,6 @@
             </div>
           </div>
         </div>
-        <!-- Progress Overview -->
         <h3 class="text-xl font-medium text-gray-800 mb-4">Your Progress</h3>
         <div class="overflow-x-auto pb-2 mb-8">
           <div class="flex space-x-4" style="min-width: max-content;">
@@ -277,7 +270,6 @@
             </div>
           </div>
         </div>
-        <!-- Quick Access Cards -->
         <h3 class="text-xl font-medium text-gray-800 mb-4">Quick Access</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
           <a
@@ -357,14 +349,11 @@
           </div>
         </div>
       </main>
-      <!-- Survey Modal (centered, wider, hidden by default) -->
       <div id="survey-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 hidden">
         <div class="bg-white rounded-2xl custom-shadow p-8 w-full max-w-lg flex flex-col items-center relative animate-fade-in">
-          <!-- Close button -->
           <button id="close-survey-btn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl" title="Close">
             <i class="ri-close-line"></i>
           </button>
-          <!-- Progress Bar -->
           <div id="progress-bar-container" class="w-full mb-8">
             <div class="flex justify-between mb-1">
               <span class="text-sm font-medium text-gray-700">Question <span id="current-question-number">1</span>/10</span>
@@ -374,7 +363,6 @@
               <div id="progress-bar" class="h-3 rounded-full transition-all duration-300" style="width: 10%; background: linear-gradient(90deg, #f87171 0%, #fbbf24 50%, #4ade80 100%);"></div>
             </div>
           </div>
-          <!-- Question Card -->
           <div id="question-card" class="w-full flex flex-col items-center">
             <h3 id="question-text" class="text-lg font-semibold text-gray-800 mb-6 text-center">Question goes here</h3>
             <div class="flex flex-col items-center w-full mb-6">
@@ -390,21 +378,16 @@
             </div>
             <button id="next-question-btn" class="px-6 py-2 bg-primary text-gray-700 font-medium rounded-button hover:bg-blue-100 transition-colors mt-2">Next</button>
           </div>
-          <!-- AI Analysis Card (hidden by default) -->
           <div id="ai-analysis-card" class="w-full flex flex-col items-center mt-8 hidden">
             <div class="w-12 h-12 flex items-center justify-center bg-primary rounded-full mb-4">
               <i class="ri-robot-line ri-lg text-gray-700"></i>
             </div>
             <h3 class="text-xl font-semibold text-gray-800 mb-2">AI Analysis & Suggestions</h3>
             <p class="text-gray-700 mb-4 text-center">
-              Example analysis and suggestions based on your answers will appear here.<br>
-              (This area will be improved with AI integration.)
+              AI suggestions loading...
             </p>
             <ul class="list-disc text-left text-gray-700 mb-4 pl-6">
-              <li>Try reducing screen time in the evening for better sleep.</li>
-              <li>Short daily walks can improve your mood.</li>
-              <li>Remember to share medication effects with your doctor.</li>
-            </ul>
+              </ul>
             <button id="restart-btn" class="px-6 py-2 bg-primary text-gray-700 font-medium rounded-button hover:bg-blue-100 transition-colors mt-2">Start Again</button>
           </div>
         </div>
@@ -440,7 +423,6 @@
           background: linear-gradient(90deg, #f87171 0%, #fbbf24 50%, #4ade80 100%);
         }
       </style>
-      <!-- Bottom Navigation -->
       <footer class="bg-white shadow-lg py-3 mt-auto">
         <div class="container mx-auto px-4">
           <div class="flex justify-around">
@@ -713,30 +695,36 @@
         sliderEmoji.textContent = sliderEmojis[val - 1];
       });
 
-      nextBtn.addEventListener("click", function() {
+      nextBtn.addEventListener("click", async function() {
         const val = parseInt(ratingSlider.value);
         answers[currentQuestion] = val;
         currentQuestion++;
         if (currentQuestion < questions.length) {
           showQuestion(currentQuestion);
         } else {
-          // All questions done, show analysis
+          // All questions answered, show analysis
           questionCard.classList.add("hidden");
           progressBarContainer.classList.add("hidden");
           aiAnalysisCard.classList.remove("hidden");
           // Show loading message
-          aiAnalysisText.textContent = "Loading AI suggestions...";
+          aiAnalysisText.textContent = "AI suggestions loading...";
           aiAnalysisList.innerHTML = "";
-          fetchAISuggestions(answers)
-            .then(result => {
-              // Display the AI analysis and suggestions
-              aiAnalysisText.textContent = result.analysis;
-              aiAnalysisList.innerHTML = result.suggestions.map(s => `<li>${s}</li>`).join("");
-            })
-            .catch(() => {
-              aiAnalysisText.textContent = "Sorry, there was a problem getting AI suggestions.";
-              aiAnalysisList.innerHTML = "";
+          try {
+            const result = await fetchAISuggestions(answers);
+            // Display AI analysis and suggestions
+            aiAnalysisText.textContent = result.analysis;
+            // Clear and add new suggestions
+            aiAnalysisList.innerHTML = ""; 
+            result.suggestions.forEach(s => {
+              const li = document.createElement("li");
+              li.textContent = s;
+              aiAnalysisList.appendChild(li);
             });
+          } catch (error) {
+            console.error("Error fetching AI suggestions:", error);
+            aiAnalysisText.textContent = "Sorry, there was an issue fetching AI suggestions. Please try again later.";
+            aiAnalysisList.innerHTML = "";
+          }
         }
       });
 
@@ -763,110 +751,100 @@
         surveyModal.classList.add("hidden");
       });
 
-      // On page load, modal is closed
+      // Close modal on page load
       document.addEventListener("DOMContentLoaded", function() {
         surveyModal.classList.add("hidden");
       });
 
-      // Hugging Face AI integration
+      // Smart Rule-Based AI System (100% Reliable)
       async function fetchAISuggestions(answers) {
-          // Simulate AI thinking delay
-          await new Promise(resolve => setTimeout(resolve, 1500));
-          
-          const mood = answers[0];
-          const energy = answers[1];
-          const pain = answers[2];
-          const sleep = answers[3];
-          const appetite = answers[4];
-          const medication = answers[5];
-          const motivation = answers[6];
-          const support = answers[7];
-          const anxiety = answers[8];
-          const overall = answers[9];
+        console.log("Using smart rule-based AI system...");
+        
+        // Calculate average score and analyze patterns
+        const avgScore = answers.reduce((a, b) => a + b, 0) / answers.length;
+        const moodScore = answers[0]; // How would you rate your mood today?
+        const energyScore = answers[1]; // How is your energy level?
+        const painScore = answers[2]; // What is your level of pain/discomfort?
+        const sleepScore = answers[3]; // How was your sleep quality?
+        const appetiteScore = answers[4]; // How was your appetite?
+        const medicationScore = answers[5]; // How effective do you feel your medication is?
+        const motivationScore = answers[6]; // How motivated were you to do daily activities?
+        const supportScore = answers[7]; // Did you feel the need for support?
+        const anxietyScore = answers[8]; // What was your level of anxiety/worry?
+        const overallHealthScore = answers[9]; // How do you feel about your overall health?
 
-          // Calculate health patterns
-          const avgScore = answers.reduce((a, b) => a + b, 0) / answers.length;
-          const lowScores = answers.filter(a => a <= 2).length;
-          const highScores = answers.filter(a => a >= 4).length;
-          
-          let analysis = "";
-          let suggestions = [];
-
-          // AI Analysis based on patterns
-          if (avgScore <= 2.0) {
-            analysis = "I can see you're having a particularly challenging day. Your responses indicate multiple areas that need attention, which is completely normal during health journeys.";
-          } else if (avgScore <= 2.8) {
-            analysis = "Your responses suggest you're experiencing some difficulties today. This is a common part of the healing process, and there are several ways we can address these challenges.";
-          } else if (avgScore <= 3.5) {
-            analysis = "You're showing mixed indicators today - some areas are doing well while others need attention. This balance is actually quite normal and manageable.";
-          } else if (avgScore <= 4.2) {
-            analysis = "Great news! Your responses indicate you're having a generally positive day. You're making good progress in your health journey.";
-          } else {
-            analysis = "Excellent! Your responses show you're in a very positive state today. You're demonstrating strong health indicators across all areas.";
-          }
-
-          // Personalized suggestions based on specific scores
-          if (mood <= 2) {
-            suggestions.push("Try a 5-minute mindfulness session - research shows it can improve mood within minutes. Find a quiet space and focus on your breathing.");
-          } else if (mood >= 4) {
-            suggestions.push("Your positive mood is a great foundation - try to maintain this energy throughout your day and share it with others.");
-          }
-
-          if (energy <= 2) {
-            suggestions.push("Low energy can be challenging. Try a 10-minute gentle walk - even short movement can boost energy levels significantly. Start with just 5 minutes if needed.");
-          } else if (energy >= 4) {
-            suggestions.push("Your high energy is perfect for completing important tasks - use this momentum wisely and tackle your most important activities first.");
-          }
-
-          if (pain >= 4) {
-            suggestions.push("For discomfort management, consider gentle stretching exercises - they can help without overexertion. Focus on slow, controlled movements.");
-          }
-
-          if (sleep <= 2) {
-            suggestions.push("Poor sleep affects everything. Try reducing screen time 1 hour before bed and create a calming bedtime routine with reading or meditation.");
-          }
-
-          if (medication <= 2) {
-            suggestions.push("If medications aren't working as expected, discuss this with your healthcare provider - adjustments might help. Keep a symptom diary to track patterns.");
-          }
-
-          if (anxiety >= 4) {
-            suggestions.push("For anxiety relief, practice deep breathing: inhale for 4 counts, hold for 4, exhale for 6. Repeat this cycle 5-10 times.");
-          }
-
-          if (support >= 4) {
-            suggestions.push("Don't hesitate to reach out to your support network - connection is crucial for health and healing. Even a brief call can make a difference.");
-          }
-
-          if (motivation <= 2) {
-            suggestions.push("Low motivation is common during health challenges. Start with small, achievable goals - even 5 minutes of activity counts as progress.");
-          }
-
-          if (appetite <= 2) {
-            suggestions.push("Poor appetite can affect energy and mood. Try small, frequent meals and stay hydrated. Smoothies or soups might be easier to consume.");
-          }
-
-          // Add general wellness suggestions if we don't have enough specific ones
-          if (suggestions.length < 2) {
-            if (highScores >= 6) {
-              suggestions.push("You're doing well overall! Consider sharing your positive experiences with others who might benefit from your insights.");
-            } else {
-              suggestions.push("Stay hydrated throughout the day - even mild dehydration can affect mood and energy levels.");
-              suggestions.push("Consider journaling your daily experiences - it can help track patterns and celebrate small victories.");
-            }
-          }
-
-          // Ensure we have exactly 3 suggestions
-          while (suggestions.length < 3) {
-            suggestions.push("Remember to be patient with yourself - healing and progress take time, and every small step forward counts.");
-          }
-          suggestions = suggestions.slice(0, 3);
-
-          return {
-            analysis: analysis,
-            suggestions: suggestions
-          };
+        // Generate personalized analysis
+        let analysis = "Based on your survey responses, here's my analysis: ";
+        
+        if (avgScore < 2.5) {
+          analysis += "I notice you're experiencing some challenges today. Your scores indicate you may be having a difficult time with various aspects of your health and well-being.";
+        } else if (avgScore < 4) {
+          analysis += "You're showing moderate levels across different health indicators. There's room for improvement, but you're managing reasonably well.";
+        } else {
+          analysis += "Excellent! Your scores show you're doing very well across all health indicators. Keep up the great work!";
         }
+
+        // Generate personalized suggestions based on specific scores
+        let suggestions = [];
+
+        // Mood-based suggestions
+        if (moodScore <= 2) {
+          suggestions.push("Consider talking to your healthcare provider about your mood. They can help you find strategies to improve your emotional well-being.");
+        } else if (moodScore >= 4) {
+          suggestions.push("Your positive mood is great! Try to maintain this by engaging in activities you enjoy and staying connected with loved ones.");
+        }
+
+        // Energy-based suggestions
+        if (energyScore <= 2) {
+          suggestions.push("Low energy can be challenging. Try to maintain a regular sleep schedule and consider light activities like short walks if approved by your doctor.");
+        } else if (energyScore >= 4) {
+          suggestions.push("Great energy levels! Use this energy to stay active and engaged with your daily activities.");
+        }
+
+        // Pain-based suggestions
+        if (painScore >= 4) {
+          suggestions.push("If you're experiencing significant pain, please contact your healthcare team. Don't hesitate to ask for help managing your symptoms.");
+        }
+
+        // Sleep-based suggestions
+        if (sleepScore <= 2) {
+          suggestions.push("Poor sleep can affect your overall health. Try establishing a bedtime routine and avoid screens before sleep.");
+        }
+
+        // Medication-based suggestions
+        if (medicationScore <= 2) {
+          suggestions.push("If your medication doesn't seem effective, discuss this with your healthcare provider. They can help adjust your treatment plan.");
+        }
+
+        // Support-based suggestions
+        if (supportScore >= 4) {
+          suggestions.push("It's completely normal to need support. Reach out to friends, family, or support groups. You don't have to go through this alone.");
+        }
+
+        // Anxiety-based suggestions
+        if (anxietyScore >= 4) {
+          suggestions.push("High anxiety can be overwhelming. Consider relaxation techniques like deep breathing or meditation. Your healthcare team can also help.");
+        }
+
+        // Fill remaining slots with general advice
+        while (suggestions.length < 3) {
+          if (avgScore < 2.5) {
+            suggestions.push("Remember to be patient with yourself - healing and progress take time. Every small step forward counts.");
+          } else if (avgScore < 4) {
+            suggestions.push("Continue monitoring your symptoms and stay in regular contact with your healthcare team.");
+          } else {
+            suggestions.push("Keep up your positive habits and routines. You're doing great!");
+          }
+        }
+
+        // Ensure exactly 3 suggestions
+        suggestions = suggestions.slice(0, 3);
+
+        return {
+          analysis: analysis,
+          suggestions: suggestions
+        };
+      }
     </script>
   </body>
 </html>
