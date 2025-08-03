@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+        body {
+            background-color: #fffdd0; /* cream */
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+            display: inline-block;
+            width: 250px;
+        }
+        input, button {
+            width: 100%;
+            padding: 6px;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+        .register {
+            margin-top: 10px;
+            font-size: 13px;
+            color: #333;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        h1 {
+            font-family: sans-serif;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>HOPE</h1>
+        <form method="post" action="/token">
+            <h3>Login</h3>
+            <label for="email">Email:</label><br>
+            <input type="text" id="email" name="email" required><br>
+
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" required><br>
+
+            <button type="submit">Login</button>
+            <div class="register" onclick="window.location.href='/register'">Register</div>
+        </form>
+    </div>
+</body>
+</html>
